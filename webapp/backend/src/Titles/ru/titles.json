@@ -4,7 +4,7 @@
   "BASKET_INFO_TITLE": "Ваша корзина: \n\n*\n\nИтого: * руб.",
   "WEBAPP_TITLE":"Чтобы открыть наш магазин нажмите кнопку ниже",
   "WEBAPP_BUTTON":"Каталог",
-  "WEBAPP_INLINE_BUTTON":"🛍Каталог",
+  "WEBAPP_INLINE_BUTTON":"Каталог",
   "BASKET_INLINE_BUTTON": "Заказать",
   "ORDERS_BUTTON": "Мои заказы",
   "CHOOSE_ORDER": "Выберите один из заказов из списка ниже",

@@ -20,9 +20,7 @@
 
                     </div>
                 </router-link>
-                <div class="favorite-toggle" :class="item.is_favorite ? 'favorite-item' : ''">
-                    <img :src="require('@/assets/img/fav.svg')" />
-                </div>
+
             </div>
         </template>
     </MasonryWall>
@@ -32,7 +30,10 @@
 import searchBlock from '@/components/Search.vue';
 import eventBus from '../eventBus'
 import { ListLoader, InstagramLoader } from 'vue-content-loader'
-
+/*
+<div class="favorite-toggle" :class="item.is_favorite ? 'favorite-item' : ''">
+                    <img :src="require('@/assets/img/fav.svg')" />
+                </div> */
 
 export default {
     components: { searchBlock, InstagramLoader },

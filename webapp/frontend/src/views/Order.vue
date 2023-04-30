@@ -1,7 +1,6 @@
 <template>
     <h1>Оформление заказа</h1>
     <div class="order-block">
-        <button class="" @click="order">Оформить заказ</button>
         <div v-html="orderText"></div>
         <div v-if="false">
             <p>Расчет доставки
@@ -57,6 +56,7 @@
 import eventBus from '../eventBus'
 import { ListLoader, InstagramLoader } from 'vue-content-loader'
 import { min } from 'moment';
+//        <button class="" @click="order">Оформить заказ</button>
 
 
 export default {

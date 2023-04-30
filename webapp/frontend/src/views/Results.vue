@@ -4,7 +4,7 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
-    <button @click="routeToBasket">Корзина</button>
+
     <MasonryWall class="results-block" :items="$store.state.results ?? []" :ssr-columns="2" :column-width="bodyWidth / 6"
         :gap="12">
         <template #default="{ item, index }">
@@ -30,7 +30,7 @@
 import searchBlock from '@/components/Search.vue';
 import eventBus from '../eventBus'
 import { ListLoader, InstagramLoader } from 'vue-content-loader'
-/*
+/*<button @click="routeToBasket">Корзина</button>
 <div class="favorite-toggle" :class="item.is_favorite ? 'favorite-item' : ''">
                     <img :src="require('@/assets/img/fav.svg')" />
                 </div> */

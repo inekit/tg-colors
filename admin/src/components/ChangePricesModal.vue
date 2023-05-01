@@ -150,11 +150,12 @@ export default {
         })
     },
     editOne($event, size, material, is_backside) {
+      const price = $event.target.value
       const index = this.edited_array.findIndex(el =>
-        el.material === material && el.price === $event && el.is_backside === is_backside)
-      if (index !== -1) this.edited_array[index].price = $event;
+        el.material === material && el.price === price && el.is_backside === is_backside)
+      if (index !== -1) this.edited_array[index].price = price;
       else
-        this.edited_array.push({ size, material, is_backside, price: $event });
+        this.edited_array.push({ size, material, is_backside, price: price });
       console.log(this.edited_array)
     },
     dropOne(size, material, is_backside) {

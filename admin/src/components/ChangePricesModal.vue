@@ -98,31 +98,15 @@ import eventBus from '../eventBus'
 export default {
   components: {},
   props: {
-    mode: {
-      required: true,
-      type: String,
-      validator: (value) => ['new', 'edit'].includes(value.toLowerCase()),
-    },
-    visible: false,
-    formData: {
-      title: '',
-      text: '',
-      description: '',
-      preview: '',
-      category_name: '',
-      image_list: [],
-      tags_array: new Set(),
-      options_object: {},
-      options_array: [],
-    },
-
+    visible: Boolean,
   },
   data() {
     return {
-      textMd2: '',
-      textEditMode: 'md2',
+      formData: {
+        options_object: {},
+        options_array: [],
+      },
       formValid: false,
-      preview_list: [],
       options_object: {},
       options_object_backside: {},
       distinct_materials: [],

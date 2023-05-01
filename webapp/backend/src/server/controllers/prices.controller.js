@@ -3,7 +3,7 @@ const service = require("../services/crud.service").getService("Item", [
   "text",
   "description",
 ]);
-const pricesService = require("../services/items.service");
+const pricesService = require("../services/prices.service");
 
 function get(req, res, next) {
   pricesService

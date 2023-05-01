@@ -76,8 +76,7 @@
       </CModalBody>
       <CModalFooter>
         <CButton color="secondary" @click="closeModal"> Отменить </CButton>
-        <CButton v-show="mode === 'new'" color="primary" type="submit">Добавить</CButton>
-        <CButton v-show="mode === 'edit'" color="primary" type="submit">Редактировать</CButton>
+        <CButton color="primary" type="submit">Редактировать</CButton>
       </CModalFooter>
     </CForm>
   </CModal>
@@ -160,7 +159,8 @@ export default {
         })
     },
     editOne($event, size, material, is_backside) {
-      const price = $event.target.value
+      const price = parseInt($event.target.value);
+      if (!price) return this.dropOne(size, material, is_backside);
       const index = this.edited_array.findIndex(el =>
         el.material === material && el.size === size && el.is_backside === is_backside)
       if (index !== -1) this.edited_array[index].price = price;

@@ -25,13 +25,15 @@
                   {{ materialName }}
                 </td>
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
-                  <CFormInput type="number" @change="editOne(sizeName, materialName, true)" />
-                  <div
-                    v-if="edited_array.findIndex(el => el.material === 'materialName' && el.price === 'price' && el.is_backside === true) === -1">
-                    {{
-                      options_object[materialName][sizeName] }}</div>
-                  <div v-else>
-                    <CButton color="secondary" @click="dropOne(sizeName, materialName, true)">X</CButton>
+                  <div v-if="options_object[materialName][sizeName]">
+                    <CFormInput type="number" @change="editOne($event, sizeName, materialName, true)" />
+                    <div
+                      v-if="edited_array.findIndex(el => el.material === materialName && el.price === price && el.is_backside === true) === -1">
+                      {{
+                        options_object[materialName][sizeName] }}</div>
+                    <div v-else>
+                      <CButton color="secondary" @click="dropOne(sizeName, materialName, true)">X</CButton>
+                    </div>
                   </div>
                 </td>
               </tr>
@@ -147,8 +149,12 @@ export default {
           return false
         })
     },
-    editOne(size, material, is_backside) {
-      this.edited_array.push({ size, material, is_backside });
+    editOne($event, size, material, is_backside) {
+      const index = this.edited_array.findIndex(el =>
+        el.material === material && el.price === $event && el.is_backside === is_backside)
+      if (index !== -1) this.edited_array[index].price = $event;
+      else
+        this.edited_array.push({ size, material, is_backside, price: $event });
       console.log(this.edited_array)
     },
     dropOne(size, material, is_backside) {

@@ -26,13 +26,13 @@
                 </td>
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
                   <div v-if="options_object[materialName][sizeName]">
-                    <CFormInput type="number" @change="editOne($event, sizeName, materialName, true)" />
+                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, false)" />
                     <div
-                      v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === true) === -1">
+                      v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === false) === -1">
                       {{
                         options_object[materialName][sizeName] }}</div>
                     <div v-else>
-                      <CButton color="secondary" @click="dropOne(sizeName, materialName, true)">X</CButton>
+                      <CButton color="secondary" @click="dropOne(sizeName, materialName, false)">X</CButton>
                     </div>
                   </div>
                 </td>
@@ -58,7 +58,16 @@
                   {{ materialName }}
                 </td>
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
-                  <CFormInput type="number" v-model.number="options_object_backside[materialName][sizeName]" />
+                  <div v-if="options_object_backside[materialName][sizeName]">
+                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, true)" />
+                    <div
+                      v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === true) === -1">
+                      {{
+                        options_object_backside[materialName][sizeName] }}</div>
+                    <div v-else>
+                      <CButton color="secondary" @click="dropOne(sizeName, materialName, true)">X</CButton>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </tbody>
@@ -108,7 +117,7 @@ export default {
     this.options_object = {};
     this.options_object_backside = {};
     this.formData.options_array = this.formData.options_array?.
-      filter(({ material, price, size }) => !material && !size && !price ? false : true)
+      filter(({ material, price, size }) => !material && !size && !price ? false : true)?.map(el => el.price = `${el.min_price}-${el.max_price}`);
     this.distinct_materials = [...new Set(this.formData.options_array?.map(({ material }) => material))]
     this.distinct_sizes = [...new Set(this.formData.options_array?.map(({ size }) => size))]
 
@@ -159,7 +168,7 @@ export default {
       console.log(this.edited_array)
     },
     dropOne(size, material, is_backside) {
-      this.edited_array = this.edited_array.filter((el) => !(el.size === size, el.material === material, el.is_backside === is_backside));
+      this.edited_array = this.edited_array.filter((el) => !(el.size === size && el.material === material && el.is_backside === is_backside));
       console.log(this.edited_array)
     },
     changePrices() {

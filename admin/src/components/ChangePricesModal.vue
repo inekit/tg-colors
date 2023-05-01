@@ -117,7 +117,8 @@ export default {
     this.options_object = {};
     this.options_object_backside = {};
     this.formData.options_array = this.formData.options_array?.
-      filter(({ material, price, size }) => !material && !size && !price ? false : true)?.map(el => el.price = `${el.min_price}-${el.max_price}`);
+      filter(({ material, price, size }) => !material && !size && !price ? false : true)?.
+      map(el => { el.price = `${el.min_price}-${el.max_price}`; return el; });
     this.distinct_materials = [...new Set(this.formData.options_array?.map(({ material }) => material))]
     this.distinct_sizes = [...new Set(this.formData.options_array?.map(({ size }) => size))]
 

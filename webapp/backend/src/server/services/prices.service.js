@@ -43,7 +43,9 @@ class UsersService {
       await queryRunner.startTransaction();
 
       try {
-        for (let { size, material, is_backside, price } of edited_array) {
+        for (let { size, material, is_backside, price } of JSON.parse(
+          edited_array
+        )) {
           if (!price) continue;
 
           await connection.query(

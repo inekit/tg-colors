@@ -204,7 +204,7 @@ export default {
       this.formData.category_name = e.target.value
     },
     closeModal() {
-      eventBus.$emit('closeModal')
+      eventBus.$emit('closePrices')
     },
     constractFromData() {
 

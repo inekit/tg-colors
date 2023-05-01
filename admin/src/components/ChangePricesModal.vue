@@ -28,7 +28,7 @@
                   <div v-if="options_object[materialName][sizeName]">
                     <CFormInput type="number" @change="editOne($event, sizeName, materialName, true)" />
                     <div
-                      v-if="edited_array.findIndex(el => el.material === materialName && el.price === price && el.is_backside === true) === -1">
+                      v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === true) === -1">
                       {{
                         options_object[materialName][sizeName] }}</div>
                     <div v-else>
@@ -152,14 +152,14 @@ export default {
     editOne($event, size, material, is_backside) {
       const price = $event.target.value
       const index = this.edited_array.findIndex(el =>
-        el.material === material && el.price === price && el.is_backside === is_backside)
+        el.material === material && el.size === size && el.is_backside === is_backside)
       if (index !== -1) this.edited_array[index].price = price;
       else
         this.edited_array.push({ size, material, is_backside, price: price });
       console.log(this.edited_array)
     },
     dropOne(size, material, is_backside) {
-      this.edited_array = this.edited_array.filter((el) => !(el.size === size.el.material === material, el.is_backside === is_backside));
+      this.edited_array = this.edited_array.filter((el) => !(el.size === size, el.material === material, el.is_backside === is_backside));
       console.log(this.edited_array)
     },
     changePrices() {

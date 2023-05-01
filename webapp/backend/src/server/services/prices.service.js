@@ -32,7 +32,7 @@ class UsersService {
     });
   }
 
-  edit(edited_array) {
+  edit({ edited_array }) {
     return new Promise(async (res, rej) => {
       const connection = await tOrmCon;
 

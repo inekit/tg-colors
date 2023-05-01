@@ -1,12 +1,14 @@
 <template>
   <div>
     <AddItemModal :visible="formVisible" :formData="formData" :mode="formMode" />
+    <ChangePricesModal :visible="changePricesVisible" />
     <Table :fields="tableFieldNames" :postData="get" :actions="dataActions" :rows="rows" editMode="form" name="Позиции" />
   </div>
 </template>
 
 <script>
 import AddItemModal from '@/components/AddItemModal.vue'
+import ChangePricesModal from '@/components/ChangePricesModal.vue'
 import Table from '@/components/Table.vue'
 import eventBus from '../eventBus'
 
@@ -20,13 +22,14 @@ const myApi = axios.create({
 export default {
   components: {
     AddItemModal,
-    Table,
+    Table, ChangePricesModal,
   },
   props: ['tag', 'project'],
   data() {
     return {
       myApi: myApi,
       formVisible: false,
+      changePricesVisible: false,
       formData: {},
       rows: [],
       dataActions: {
@@ -57,6 +60,12 @@ export default {
         category: this.$route.params.categoryName,
       }
       this.formVisible = true
+    })
+    eventBus.$on('changePrices', () => {
+      this.changePricesVisible = true
+    })
+    eventBus.$on('closePrices', () => {
+      this.changePricesVisible = false
     })
     eventBus.$on('closeModal', () => {
       this.formVisible = false

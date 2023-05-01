@@ -22,7 +22,7 @@ class UsersService {
 
       connection
         .query(
-          `select size, material, is_backside, min(price) price, max(price) max_price
+          `select size, material, is_backside, min(price) min_price, max(price) max_price
               from public.items p
               left join item_options io on p.id = io.item_id
               group by size, material, is_backside`

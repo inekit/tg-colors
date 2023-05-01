@@ -55,7 +55,7 @@ class UsersService {
         }
         await queryRunner.commitTransaction();
 
-        res(data);
+        res({ edited: true });
       } catch (error) {
         console.log(error);
         await queryRunner.rollbackTransaction();

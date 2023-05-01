@@ -27,7 +27,7 @@
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
                   <CFormInput type="number" @change="editOne(sizeName, materialName, true)" />
                   <div
-                    v-if="edited_array.findIndex(el => el.material === 'materialName' && el.price === 'price' && el.is_backside === true) !== -1">
+                    v-if="edited_array.findIndex(el => el.material === 'materialName' && el.price === 'price' && el.is_backside === true) === -1">
                     {{
                       options_object[materialName][sizeName] }}</div>
                   <div v-else>

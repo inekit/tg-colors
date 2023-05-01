@@ -26,7 +26,6 @@
                 </td>
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
                   <div v-if="options_object[materialName][sizeName]">
-                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, false)" />
                     <div
                       v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === false) === -1">
                       {{
@@ -34,6 +33,7 @@
                     <div v-else>
                       <CButton color="secondary" @click="dropOne(sizeName, materialName, false)">X</CButton>
                     </div>
+                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, false)" />
                   </div>
                 </td>
               </tr>
@@ -59,7 +59,6 @@
                 </td>
                 <td v-for="sizeName in distinct_sizes" :key="'size-' + sizeName">
                   <div v-if="options_object_backside[materialName][sizeName]">
-                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, true)" />
                     <div
                       v-if="edited_array.findIndex(el => el.material === materialName && el.size === sizeName && el.is_backside === true) === -1">
                       {{
@@ -67,6 +66,7 @@
                     <div v-else>
                       <CButton color="secondary" @click="dropOne(sizeName, materialName, true)">X</CButton>
                     </div>
+                    <CFormInput type="number" @input="editOne($event, sizeName, materialName, true)" />
                   </div>
                 </td>
               </tr>
@@ -113,6 +113,7 @@ export default {
   async updated() {
     console.log(1)
     this.formData = { options_array: await this.getPrices() };
+    this.edited_array = [];
     this.options_object = {};
     this.options_object_backside = {};
     this.formData.options_array = this.formData.options_array?.

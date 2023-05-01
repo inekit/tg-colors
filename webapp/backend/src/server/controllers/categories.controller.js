@@ -8,7 +8,7 @@ function getAll(req, res, next) {
   console.log(req.query.category);
   if (!req.query.id)
     servicePreset
-      .get(req.query.id, req.query.page, req.query.take)
+      .get(req.query.id, 1, 100)
       .then((data) => res.send(data))
       .catch((error) => next(error));
   else getOne(req, res);

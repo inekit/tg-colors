@@ -16,7 +16,7 @@
                     </div>
                     <div class="text-container">
                         <h2>{{ item.title }}</h2>
-                        <h3>От {{ getMinPrice(item.options_array) }} ₽</h3>
+                        <h3 hidden>От {{ getMinPrice(item.options_array) }} ₽</h3>
 
                     </div>
                 </router-link>
@@ -241,7 +241,7 @@ export default {
             display: block;
             text-decoration: none;
             //position: absolute;
-            height: calc(100% + 2rem);
+            height: calc(140% + 2rem);
             width: calc(100%);
 
             //margin: 1rem;
@@ -260,6 +260,7 @@ export default {
                 font-weight: 400;
                 font-size: 1.1rem;
                 word-wrap: break-word;
+                text-align: center;
             }
 
             h3 {
@@ -275,8 +276,8 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                max-width: 200%;
-                max-height: 130%;
+                max-width: 300%;
+                max-height: 110%;
                 min-width: 100%;
                 min-height: 100%;
                 width: auto;

@@ -32,19 +32,36 @@ class UsersService {
     });
   }
 
-  edit({ size, material, is_backside, price }) {
+  edit(edited_array) {
     return new Promise(async (res, rej) => {
       const connection = await tOrmCon;
 
-      if (!price) rej("Null price");
+      const queryRunner = connection.createQueryRunner();
 
-      await connection
-        .query(
-          "update item_options set price = $1 where size = $2 and material = $3 and is_backside = $4",
-          [price, size, material, is_backside]
-        )
-        .then((data) => res(data))
-        .catch((error) => rej(new MySqlError(error)));
+      await queryRunner.connect();
+
+      await queryRunner.startTransaction();
+
+      try {
+        for (let { size, material, is_backside, price } of edited_array) {
+          if (!price) continue;
+
+          await connection.query(
+            "update item_options set price = $1 where size = $2 and material = $3 and is_backside = $4",
+            [price, size, material, is_backside]
+          );
+        }
+        await queryRunner.commitTransaction();
+
+        res(data);
+      } catch (error) {
+        console.log(error);
+        await queryRunner.rollbackTransaction();
+
+        rej(new MySqlError(error));
+      } finally {
+        await queryRunner.release();
+      }
     });
   }
 }

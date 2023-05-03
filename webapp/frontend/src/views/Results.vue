@@ -222,7 +222,7 @@ export default {
         &:nth-child(4n+1),
         &:nth-child(4n) {
             .img-container {
-                height: 40vw;
+                height: 60vw;
             }
         }
 
@@ -277,7 +277,7 @@ export default {
                 left: 50%;
                 transform: translate(-50%, -50%);
                 max-width: 300%;
-                max-height: 110%;
+                max-height: 130%;
                 min-width: 100%;
                 min-height: 100%;
                 width: auto;

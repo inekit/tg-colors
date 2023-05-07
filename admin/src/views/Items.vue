@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CFormInput class="mb-4" type="text" v-model="searchQuery" @input="get()" placeholder="Поиск по названию" />
+    <CFormInput class="mb-4" type="text" @input="search" placeholder="Поиск по названию" />
     <AddItemModal :visible="formVisible" :formData="formData" :mode="formMode" />
     <ChangePricesModal :visible="changePricesVisible" />
     <Table :fields="tableFieldNames" :postData="get" :actions="dataActions" :rows="rows" editMode="form" name="Позиции" />
@@ -172,6 +172,10 @@ export default {
     },
     putLower(item) {
       this.putHigrer(item, 'down')
+    },
+    search(event) {
+      this.searchQuery = event.target.value;
+      this.get()
     },
     get(take, page) {
       console.log(this.tag)

@@ -154,7 +154,7 @@ export default {
     },
     putHigrer(item, type = 'up') {
       return myApi
-        .put(this.$store.state.publicPath + '/api/admin/categories/', {
+        .put(this.$store.state.publicPath + '/api/admin/items/', {
           order_id: item.order_id,
           id: item.id,
           type,

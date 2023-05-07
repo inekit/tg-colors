@@ -129,9 +129,9 @@ class UsersService {
               [order_id]
             )
           )?.[0];
-          console.log(concurent_order_id);
+          console.log(concurent);
 
-          if (!concurent_order_id) data = { edit: false };
+          if (!concurent) data = { edit: false };
           else {
             await queryRunner.query(
               `update categories set order_id = $1 where order_id = $2`,

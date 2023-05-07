@@ -5,26 +5,22 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
 
-    <MasonryWall class="results-block" :items="$store.state.results ?? []" :ssr-columns="3" :column-width="bodyWidth / 9"
-        :gap="12" fit-width="true">
-        <template #default="{ item, index }">
-            <div class="result-item">
-                <router-link
-                    :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
-                    <div class="img-container">
-                        <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
-                            :onerror="`javascript:this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
-                    </div>
-                    <div class="text-container">
-                        <h2>{{ item.title }}</h2>
-                        <h3 hidden>От {{ getMinPrice(item.options_array) }} ₽</h3>
 
-                    </div>
-                </router-link>
+    <div class="result-item" v-for="item, index in $store.state.results ?? []">
+        <router-link
+            :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
+            <div class="img-container">
+                <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
+                    :onerror="`javascript:this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
+            </div>
+            <div class="text-container">
+                <h2>{{ item.title }}</h2>
+                <h3 hidden>От {{ getMinPrice(item.options_array) }} ₽</h3>
 
             </div>
-        </template>
-    </MasonryWall>
+        </router-link>
+
+    </div>
 </template>
 
 <script>
@@ -195,7 +191,8 @@ export default {
 
 <style lang="scss">
 .results-block {
-    // display: flex;
+    display: flex;
+    gap: 12px;
     width: calc(100% - 2rem);
     margin: 1rem;
     padding: 0;
@@ -213,6 +210,7 @@ export default {
         //margin: 1rem;
         //margin-bottom: 0;
         margin: 0;
+        flex: 1 1 calc((100% / 3) - 2rem) !important;
 
         border-radius: 1rem;
         display: block;

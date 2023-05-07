@@ -135,7 +135,7 @@ export default {
         },
         scroll() {
             window.onscroll = async () => {
-                let bottomwindow = window.scrollY + window.innerHeight + 1000 > document.documentElement.scrollHeight;
+                let bottomwindow = window.scrollY + window.innerHeight + 1500 > document.documentElement.scrollHeight;
 
                 if (bottomwindow && !this.loadingUpdate && !this.isEnded) {
                     this.loadingUpdate = true;
@@ -154,7 +154,7 @@ export default {
             const results = await this.$store.state.myApi.get(this.$store.state.restAddr + subPath, {
                 params: {
                     searchQuery: this.$store.state.searchQuery,
-                    take: 20,
+                    take: 30,
                     page: this.page ?? 1,
                     sort: this.$store.state.filters.sort_type,
                     category: this.$store.state.filters.category_name,

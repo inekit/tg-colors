@@ -1,4 +1,5 @@
 var EntitySchema = require("typeorm").EntitySchema;
+var AfterInsert = require("typeorm").AfterInsert;
 
 module.exports = new EntitySchema({
   name: "Item",
@@ -35,7 +36,7 @@ module.exports = new EntitySchema({
     },
     order_id: {
       type: "int",
-      dafault: () => "id",
+      generated: "uuid",
       nullable: true,
     },
   },
@@ -55,6 +56,11 @@ module.exports = new EntitySchema({
       cascade: false,
       onDelete: "SET NULL",
       onUpdate: "cascade",
+    },
+  },
+  AfterInsert: {
+    updateOrderId() {
+      this.counters = 0;
     },
   },
 });

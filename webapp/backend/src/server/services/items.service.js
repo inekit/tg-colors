@@ -318,18 +318,10 @@ class UsersService {
         ? await Promise.all(
             previewsBinary.map(
               async (preview, id) =>
-                await this.saveReturningFileName(
-                  preview,
-                  images_array.length === previewsBinary.length && id === 0
-                )
+                await this.saveReturningFileName(preview, id === 0)
             )
           )
-        : [
-            await this.saveReturningFileName(
-              previewsBinary,
-              images_array.length === 1
-            ),
-          ];
+        : [await this.saveReturningFileName(previewsBinary, true)];
 
       console.log(previewsBinary, images, fNameFullPaths);
 

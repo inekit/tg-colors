@@ -307,7 +307,12 @@ class UsersService {
     return new Promise(async (res, rej) => {
       const images_array = Array.isArray(images) ? images : [images];
 
-      console.log("длина мас", images_array.length, images_array.length === 0);
+      console.log(
+        "длина мас",
+        images_array.length,
+        previewsBinary.length,
+        images_array.length === 0
+      );
 
       let fNameFullPaths = Array.isArray(previewsBinary)
         ? await Promise.all(
@@ -315,14 +320,14 @@ class UsersService {
               async (preview, id) =>
                 await this.saveReturningFileName(
                   preview,
-                  images_array.length === 0 && id === 0
+                  images_array.length === previewsBinary.length && id === 0
                 )
             )
           )
         : [
             await this.saveReturningFileName(
               previewsBinary,
-              images_array.length === 0
+              images_array.length === 1
             ),
           ];
 

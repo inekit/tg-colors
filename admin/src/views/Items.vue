@@ -1,5 +1,6 @@
 <template>
   <div>
+    <CFormInput class="mb-4" type="text" v-model="searchQuery" @input="get" placeholder="Поиск по названию" />
     <AddItemModal :visible="formVisible" :formData="formData" :mode="formMode" />
     <ChangePricesModal :visible="changePricesVisible" />
     <Table :fields="tableFieldNames" :postData="get" :actions="dataActions" :rows="rows" editMode="form" name="Позиции" />
@@ -32,6 +33,7 @@ export default {
       changePricesVisible: false,
       formData: {},
       rows: [],
+      searchQuery: null,
       dataActions: {
         Дублировать: { action: this.duble, color: 'primary' },
         Изменить: { action: this.change, color: 'warning' },
@@ -182,6 +184,7 @@ export default {
               ? [this.$route.params.tag]
               : undefined,
             category: this.$route.params.categoryName,
+            searchQuery: this.searchQuery,
           },
         })
         .then((res) => {

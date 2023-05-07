@@ -12,7 +12,8 @@
                 <router-link
                     :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
                     <div class="img-container">
-                        <img :src="`/pics/${item.image_list?.[0]}`" />
+                        <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
+                            :onError="`this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
                     </div>
                     <div class="text-container">
                         <h2>{{ item.title }}</h2>
@@ -181,6 +182,12 @@ export default {
             return results
 
         },
+        getPreviewLink(link) {
+            const parts = link.match(/\.([^.]+)$|$/)
+            if (!parts?.[1]) return;
+            return parts[0] + '_preview' + parts[1]
+
+        }
     }
 }
 </script>

@@ -121,6 +121,12 @@ export default {
             return results
 
         },
+        getPreviewLink(link) {
+            const parts = link.match(/\.([^.]+)$|$/)
+            if (!parts?.[1]) return;
+            return link?.split('.').slice(0, -1).join('.') + '_preview.' + parts[1]
+
+        }
     }
 }
 </script>

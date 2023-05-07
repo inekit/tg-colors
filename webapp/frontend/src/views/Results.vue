@@ -5,7 +5,7 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
 
-    <MasonryWall class="results-block" :items="$store.state.results ?? []" :ssr-columns="2" :column-width="bodyWidth / 6"
+    <MasonryWall class="results-block" :items="$store.state.results ?? []" :ssr-columns="3" :column-width="bodyWidth / 9"
         :gap="12">
         <template #default="{ item, index }">
             <div class="result-item">
@@ -203,7 +203,7 @@ export default {
     flex-wrap: wrap;
 
     .masonry-column {
-        flex: 1 1 calc((100% / 2) - 2rem) !important;
+        flex: 1 1 calc((100% / 3) - 2rem) !important;
     }
 
 
@@ -237,7 +237,7 @@ export default {
             //position: absolute;
             background-color: #414141;
             width: 100%;
-            height: 30vw;
+            height: 20vw;
             position: relative;
             overflow: hidden;
         }

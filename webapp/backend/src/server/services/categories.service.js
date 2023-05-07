@@ -134,7 +134,7 @@ class UsersService {
           if (!concurent) data = { edit: false };
           else {
             await queryRunner.query(
-              `update categories set order_id = $1 where order_id = $2`,
+              `update categories set order_id = $1 where name = $2`,
               [Math.max(concurent.order_id, order_id + 1), name]
             );
             await queryRunner.query(

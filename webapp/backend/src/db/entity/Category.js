@@ -27,6 +27,7 @@ module.exports = new EntitySchema({
     },
     order_id: {
       type: "int",
+      nullable: false,
       generated: true,
     },
   },

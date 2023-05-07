@@ -37,7 +37,8 @@ function addOne(req, res, next) {
 }
 
 function editOne(req, res, next) {
-  const { name, description, old_name, backside_available } = req.body;
+  const { name, description, old_name, backside_available, type, order_id } =
+    req.body;
 
   categoriesService
     .edit({
@@ -45,6 +46,8 @@ function editOne(req, res, next) {
       description,
       backside_available,
       old_name,
+      type,
+      order_id,
       image: req.body?.["preview"],
       previewBinary: req.files?.["preview"],
       id: req.body.id,

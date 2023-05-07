@@ -108,13 +108,26 @@ var getFiles = function (dir, files_) {
   return files_;
 };
 
-console.log(getFiles("public/pics"));
+function getPreviewLink(link) {
+  const parts = link.match(/\.([^.]+)$|$/);
+  if (!parts?.[1]) return;
+  return link?.split(".").slice(0, -1).join(".") + "_preview." + parts[1];
+}
 
-(async () => {})();
-/*await webp
-    .cwebp(
-      `public/pics/${fNameFullPath}`,
-      `public/pics/${image.md5}_preview.webp`,
-      "-q 90 -resize 480 0"
-    )
-    .catch((e) => console.log(e)); */
+(async () => {
+  const fileNames = getFiles("public/pics");
+
+  console.log(fileNames);
+
+  for (let name of fileNames) {
+    await webp
+      .cwebp(
+        `public/pics/${name}`,
+        `public/pics/${getPreviewLink(name)}`,
+        "-q 90 -resize 480 0"
+      )
+      .then(() => console.log(name))
+      .catch((e) => console.log(e));
+  }
+})();
+/* */

@@ -192,7 +192,7 @@ export default {
           },
         })
         .then((res) => {
-          if (res.data?.length > 0 || !this.searchQuery) this.rows = res.data
+          if (res.data?.length > 0 || this.searchQuery) this.rows = res.data
           return res.data
         })
         .catch((error) => {

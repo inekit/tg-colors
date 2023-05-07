@@ -135,7 +135,7 @@ class UsersService {
           else {
             await queryRunner.query(
               `update categories set order_id = $1 where order_id = $2`,
-              [concurent_order_id, order_id]
+              [Math.max(concurent_order_id, order_id + 1), order_id]
             );
             await queryRunner.query(
               `update categories set order_id = $1 where order_id = $2`,

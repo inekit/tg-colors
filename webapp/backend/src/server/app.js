@@ -88,3 +88,33 @@ module.exports = (ctx) => {
     if (child.error) console.log(child.error);
   });
 };
+
+var fs = require("fs");
+var path = require("path");
+const webp = require("webp-converter");
+webp.grant_permission();
+
+var getFiles = function (dir, files_) {
+  files_ = files_ || [];
+  var files = fs.readdirSync(dir);
+  for (var i in files) {
+    var name = dir + "/" + files[i];
+    if (fs.statSync(name).isDirectory()) {
+      getFiles(name, files_);
+    } else {
+      files_.push(name);
+    }
+  }
+  return files_;
+};
+
+console.log(getFiles("public/pics"));
+
+(async () => {})();
+/*await webp
+    .cwebp(
+      `public/pics/${fNameFullPath}`,
+      `public/pics/${image.md5}_preview.webp`,
+      "-q 90 -resize 480 0"
+    )
+    .catch((e) => console.log(e)); */

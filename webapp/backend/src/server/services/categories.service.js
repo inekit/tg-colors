@@ -152,7 +152,6 @@ class UsersService {
               [order_id, name]
             )
           )?.[0];
-          console.log(concurent);
 
           if (!concurent) data = { edit: false };
           else {
@@ -181,6 +180,18 @@ class UsersService {
             })
             .returning("*")
             .execute();
+
+        await queryRunner.manager
+          .getRepository("Item")
+          .createQueryBuilder()
+          .update({
+            description,
+          })
+          .where({
+            category_name: old_name,
+          })
+          .returning("*")
+          .execute();
 
         await queryRunner.commitTransaction();
 

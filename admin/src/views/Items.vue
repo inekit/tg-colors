@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CFormInput class="mb-4" type="text" v-model="searchQuery" @input="get" placeholder="Поиск по названию" />
+    <CFormInput class="mb-4" type="text" v-model="searchQuery" @input="get()" placeholder="Поиск по названию" />
     <AddItemModal :visible="formVisible" :formData="formData" :mode="formMode" />
     <ChangePricesModal :visible="changePricesVisible" />
     <Table :fields="tableFieldNames" :postData="get" :actions="dataActions" :rows="rows" editMode="form" name="Позиции" />

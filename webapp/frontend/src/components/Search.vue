@@ -215,7 +215,7 @@ export default {
     }
 
     .sort-list {
-        height: 170px;
+        height: 220px;
         width: 100vw;
         position: fixed;
         left: 0;

@@ -168,7 +168,7 @@ class UsersService {
     return tagObjs;
   }
 
-  async saveReturningFileName(image) {
+  async saveReturningFileName(image, isPreview) {
     if (typeof image === String) return image;
 
     let fName = image?.name;
@@ -191,6 +191,15 @@ class UsersService {
             "-q 80"
           )
           .then(async (r) => {
+            if (isPreview) {
+              await webp
+                .cwebp(
+                  `public/pics/${fNameFullPath}`,
+                  `public/pics/${image.md5}_preview.webp`,
+                  "-q 90 -resize 480 0"
+                )
+                .catch((e) => console.log(e));
+            }
             await fs.unlink(`public/pics/${fNameFullPath}`).catch((e) => {});
             fNameFullPath = image.md5 + ".webp";
           })
@@ -224,7 +233,8 @@ class UsersService {
         let fNameFullPaths = Array.isArray(previewsBinary)
           ? await Promise.all(
               previewsBinary.map(
-                async (preview) => await this.saveReturningFileName(preview)
+                async (preview, id) =>
+                  await this.saveReturningFileName(preview, id === 0)
               )
             )
           : [await this.saveReturningFileName(previewsBinary)];

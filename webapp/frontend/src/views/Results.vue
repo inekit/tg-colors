@@ -185,7 +185,7 @@ export default {
         getPreviewLink(link) {
             const parts = link.match(/\.([^.]+)$|$/)
             if (!parts?.[1]) return;
-            return link.split('.').slice(0, -1).join('.') + '_preview.' + parts[1]
+            return link?.split('.').slice(0, -1).join('.') + '_preview.' + parts[1]
 
         }
     }

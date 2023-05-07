@@ -88,7 +88,7 @@ module.exports = (ctx) => {
     if (child.error) console.log(child.error);
   });
 };
-
+/*
 var fs = require("fs");
 var path = require("path");
 const webp = require("webp-converter");
@@ -130,3 +130,4 @@ function getPreviewLink(link) {
       .catch((e) => console.log(e));
   }
 })();
+*/

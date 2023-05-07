@@ -3,7 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     publicPath: 'https://fotodesire.ru/colorsserver', //'http://127.0.0.1:3000/api/admin/',
-    socketAddr: 'https://fotodesire.ru',
+    serverAddr: 'https://fotodesire.ru',
     sidebarVisible: '',
     sidebarUnfoldable: false,
   },

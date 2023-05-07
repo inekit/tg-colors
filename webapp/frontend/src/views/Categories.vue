@@ -9,7 +9,8 @@
             <div class="result-item">
                 <router-link :to="`/results/${$store.state.userId}?category=${item.name}`">
                     <div class="img-container">
-                        <img :src="`/pics/${item.preview}`" />
+                        <img :src="`/pics/${getPreviewLink(item.preview)}`"
+                            :onerror="`javascript:this.onerror=null;this.src='/pics/${item.preview}';`" />
                     </div>
                     <div class="text-container">
                         <h2>{{ item.name }}</h2>

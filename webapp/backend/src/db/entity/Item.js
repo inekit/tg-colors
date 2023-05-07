@@ -35,7 +35,7 @@ module.exports = new EntitySchema({
     },
     order_id: {
       type: "int",
-      generated: true,
+      default: () => "select max(order_id)+1 from items",
     },
   },
   relations: {

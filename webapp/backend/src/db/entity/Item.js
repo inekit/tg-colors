@@ -33,6 +33,10 @@ module.exports = new EntitySchema({
       length: 255,
       nullable: true,
     },
+    order_id: {
+      type: "int",
+      default: () => "id",
+    },
   },
   relations: {
     category: {

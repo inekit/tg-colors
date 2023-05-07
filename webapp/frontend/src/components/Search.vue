@@ -9,8 +9,8 @@
         </div>
         <div ref="sort-list" class="sort-list">
             <span>Сортировать по</span>
-            <div v-for="sort_value, sort_key in {
-                newing: 'Новизна', ascending: 'По возрастанию', descending: 'По убыванию'
+            <div v-for="sort_value, sort_key in { default: 'По умолчанию', newing: 'Новизна', ascending: 'По возрастанию цены',
+                descending: 'По убыванию цены'
             }">
                 <label :for="sort_key">{{ sort_value }}</label>
                 <input :id="sort_key" :checked="sort_key === $store.state.filters.sort_type" @click="changeSort"
@@ -24,7 +24,7 @@
                     name="project-name" value="" />
                 <label for="null-name">Все категории</label>
             </div>
-            <div v-for="category in categories" :key="category.name">
+            <div v-for="category in         categories" :key="category.name">
                 <input :id="category.name" :checked="category.name === $store.state.filters.category_name"
                     @change="changeCategory" type="radio" name="project-name" :value="category.name"
                     :label="category.name" />
@@ -49,7 +49,7 @@ export default {
         this.categories = await this.getCategories()
         let uri = window.location.search.substring(1);
         this.params = new URLSearchParams(uri)
-        this.$store.state.filters = { category_name: this.params.get('category'), sort_type: this.params.get('sort') ?? "newing" }
+        this.$store.state.filters = { category_name: this.params.get('category'), sort_type: this.params.get('sort') ?? "default" }
     },
     methods: {
         search(e) {

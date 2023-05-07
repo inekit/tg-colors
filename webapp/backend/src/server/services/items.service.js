@@ -23,7 +23,7 @@ class UsersService {
     page = 1,
     take = 10,
     searchQuery,
-    sort = "newing",
+    sort = "default",
     category,
     size,
     material,
@@ -44,7 +44,9 @@ class UsersService {
           ? "publication_date DESC"
           : sort === "ascending"
           ? "price"
-          : "price DESC";
+          : sort === "descending"
+          ? "price DESC"
+          : "order_id DESC";
 
       const connection = await tOrmCon;
 

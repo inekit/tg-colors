@@ -289,6 +289,8 @@ class UsersService {
     previewsBinary,
     optionsObject,
     optionsObjectBackside,
+    type,
+    order_id,
   }) {
     return new Promise(async (res, rej) => {
       let fNameFullPaths = Array.isArray(previewsBinary)
@@ -315,48 +317,96 @@ class UsersService {
       await queryRunner.startTransaction();
 
       try {
-        const data = await queryRunner.manager
-          .getRepository("Item")
-          .createQueryBuilder()
-          .update({
-            title,
-            category_name: categoryName ?? null,
-            description,
-            image_list: fNameFullPaths,
-          })
-          .where({
-            id: id,
-          })
-          .returning("*")
-          .execute();
-
-        await queryRunner.query("delete from item_options where item_id = $1", [
-          id,
-        ]);
-
-        const oo = optionsObject && JSON.parse(optionsObject);
-        for (let m in oo) {
-          const sizes = oo[m];
-          for (let s in sizes) {
-            const price = sizes[s];
-            console.log(s, m, price);
-            if (price)
-              await queryRunner.query(
-                "insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false)",
-                [id, s, m, price]
-              );
+        let data;
+        if (type === "up") {
+          const concurent = (
+            await queryRunner.query(
+              `select * from items where order_id >= $1 and id <> $2
+              order by order_id limit 1;
+              `,
+              [order_id, id]
+            )
+          )?.[0];
+          if (!concurent) data = { edit: false };
+          else {
+            await queryRunner.query(
+              `update items set order_id = $1 where id = $2`,
+              [Math.max(concurent.order_id, order_id + 1), id]
+            );
+            await queryRunner.query(
+              `update items set order_id = $1 where id = $2`,
+              [order_id, concurent.id]
+            );
+            data = { edit: true };
           }
-        }
-        const oob = optionsObjectBackside && JSON.parse(optionsObjectBackside);
-        for (let m in oob) {
-          const sizes = oob[m];
-          for (let s in sizes) {
-            const price = sizes[s];
-            if (price)
-              await queryRunner.query(
-                "insert into item_options (item_id,size,material,price, is_backside) values ($1,$2,$3,$4,true)",
-                [id, s, m, price]
-              );
+        } else if (type === "down") {
+          const concurent = (
+            await queryRunner.query(
+              `select * from items where order_id <= $1 and id <> $2
+              order by order_id DESC limit 1;
+              `,
+              [order_id, id]
+            )
+          )?.[0];
+
+          if (!concurent) data = { edit: false };
+          else {
+            await queryRunner.query(
+              `update items set order_id = $1 where id = $2`,
+              [Math.min(concurent.order_id, order_id - 1), id]
+            );
+            await queryRunner.query(
+              `update items set order_id = $1 where id = $2`,
+              [order_id, concurent.id]
+            );
+            data = { edit: true };
+          }
+        } else {
+          data = await queryRunner.manager
+            .getRepository("Item")
+            .createQueryBuilder()
+            .update({
+              title,
+              category_name: categoryName ?? null,
+              description,
+              image_list: fNameFullPaths,
+            })
+            .where({
+              id: id,
+            })
+            .returning("*")
+            .execute();
+
+          await queryRunner.query(
+            "delete from item_options where item_id = $1",
+            [id]
+          );
+
+          const oo = optionsObject && JSON.parse(optionsObject);
+          for (let m in oo) {
+            const sizes = oo[m];
+            for (let s in sizes) {
+              const price = sizes[s];
+              console.log(s, m, price);
+              if (price)
+                await queryRunner.query(
+                  "insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false)",
+                  [id, s, m, price]
+                );
+            }
+          }
+          const oob =
+            optionsObjectBackside && JSON.parse(optionsObjectBackside);
+          for (let m in oob) {
+            const sizes = oob[m];
+            for (let s in sizes) {
+              const price = sizes[s];
+              if (price)
+                await queryRunner.query(
+                  "insert into item_options (item_id,size,material,price, is_backside) values ($1,$2,$3,$4,true)",
+                  [id, s, m, price]
+                );
+            }
           }
         }
 

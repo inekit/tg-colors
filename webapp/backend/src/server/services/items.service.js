@@ -48,6 +48,8 @@ class UsersService {
           ? "price DESC"
           : "order_id DESC";
 
+      console.log(orderQueryPart);
+
       const connection = await tOrmCon;
 
       if (mainside_id)

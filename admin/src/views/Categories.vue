@@ -31,8 +31,8 @@ export default {
         Позиции: { action: this.routeToPosts, color: 'primary' },
         Изменить: { action: this.change, color: 'warning' },
         Удалить: { action: this.delete, color: 'danger' },
-        '▲': { action: this.putLower, color: 'secondary' },
-        '▼': { action: this.putHigrer, color: 'secondary' },
+        '▲': { action: this.putHigrer, color: 'secondary' },
+        '▼': { action: this.putLower, color: 'secondary' },
       },
       tableFieldNames: [
         {

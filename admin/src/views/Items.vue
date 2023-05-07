@@ -36,6 +36,8 @@ export default {
         Дублировать: { action: this.duble, color: 'primary' },
         Изменить: { action: this.change, color: 'warning' },
         Удалить: { action: this.delete, color: 'danger' },
+        '▲': { action: this.putHigrer, color: 'secondary' },
+        '▼': { action: this.putLower, color: 'secondary' },
       },
       tableFieldNames: [
         {
@@ -149,6 +151,25 @@ export default {
       } catch (e) {
         this.formValid = true
       }
+    },
+    putHigrer(item, type = 'up') {
+      return myApi
+        .put(this.$store.state.publicPath + '/api/admin/categories/', {
+          order_id: item.order_id,
+          id: item.id,
+          type,
+        })
+        .then(() => {
+          this.get()
+          //this.rows = this.rows.filter((el) => el.id !== id)
+          eventBus.$emit('projectDeleted')
+        })
+        .catch((error) => {
+          eventBus.$emit('noresponse', error)
+        })
+    },
+    putLower(item) {
+      this.putHigrer(item, 'down')
     },
     get(take, page) {
       console.log(this.tag)

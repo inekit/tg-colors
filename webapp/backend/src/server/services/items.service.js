@@ -305,16 +305,26 @@ class UsersService {
     order_id,
   }) {
     return new Promise(async (res, rej) => {
+      const images_array = Array.isArray(images) ? images : [images];
+
       let fNameFullPaths = Array.isArray(previewsBinary)
         ? await Promise.all(
             previewsBinary.map(
-              async (preview) => await this.saveReturningFileName(preview)
+              async (preview, id) =>
+                await this.saveReturningFileName(
+                  preview,
+                  images_array.length === 0 && id === 0
+                )
             )
           )
-        : [await this.saveReturningFileName(previewsBinary)];
+        : [
+            await this.saveReturningFileName(
+              previewsBinary,
+              images_array.length === 0
+            ),
+          ];
 
       console.log(previewsBinary, images, fNameFullPaths);
-      const images_array = Array.isArray(images) ? images : [images];
 
       fNameFullPaths = [
         ...new Set([...images_array, ...fNameFullPaths]),

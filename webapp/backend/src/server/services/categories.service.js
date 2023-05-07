@@ -30,7 +30,7 @@ class UsersService {
     });
   }
 
-  async saveReturningFileName(image) {
+  async saveReturningFileName(image, isPreview) {
     if (typeof image === String) return image;
 
     let fName = image?.name;
@@ -51,6 +51,15 @@ class UsersService {
             "-q 80"
           )
           .then(async (r) => {
+            if (isPreview) {
+              await webp
+                .cwebp(
+                  `public/pics/${fNameFullPath}`,
+                  `public/pics/${image.md5}_preview.webp`,
+                  "-q 90 -resize 480 0"
+                )
+                .catch((e) => console.log(e));
+            }
             await fs.unlink(`public/pics/${fNameFullPath}`).catch((e) => {});
             fNameFullPath = image.md5 + ".webp";
             console.log("1", fNameFullPath);
@@ -74,7 +83,10 @@ class UsersService {
       await queryRunner.startTransaction();
 
       try {
-        const fNameFullPath = await this.saveReturningFileName(previewBinary);
+        const fNameFullPath = await this.saveReturningFileName(
+          previewBinary,
+          true
+        );
 
         const data = await queryRunner.manager.getRepository("Category").save({
           name,
@@ -108,7 +120,10 @@ class UsersService {
     order_id,
   }) {
     return new Promise(async (res, rej) => {
-      const fNameFullPath = await this.saveReturningFileName(previewBinary);
+      const fNameFullPath = await this.saveReturningFileName(
+        previewBinary,
+        true
+      );
 
       const connection = await tOrmCon;
 

@@ -86,7 +86,12 @@ export default {
       eventBus.$emit('closeModal')
     },
     constractFromData() {
-      if (!this.formData.name || !this.formData.description) throw new Error()
+      const turndownService = new TurndownService({
+        headingStyle: "atx",
+      })
+      const description = turndownService.turndown(this.$refs.postTextEditor.getHTML());
+
+      if (!this.formData.name || !description) throw new Error()
 
       var formData = new FormData()
 
@@ -97,13 +102,8 @@ export default {
 
       formData.append('backside_available', this.formData.backside_available)
 
-      const turndownService = new TurndownService({
-        headingStyle: "atx",
-      })
-      formData.append(
-        'description',
-        turndownService.turndown(this.$refs.postTextEditor.getHTML()),
-      )
+
+      formData.append('description', description)
 
       return formData
     },

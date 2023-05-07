@@ -120,7 +120,7 @@ class UsersService {
 
       try {
         let data;
-        if (type) {
+        if (type === "up") {
           const concurent = (
             await queryRunner.query(
               `select * from categories where order_id >= $1 and name <> $2
@@ -136,6 +136,29 @@ class UsersService {
             await queryRunner.query(
               `update categories set order_id = $1 where name = $2`,
               [Math.max(concurent.order_id, order_id + 1), name]
+            );
+            await queryRunner.query(
+              `update categories set order_id = $1 where name = $2`,
+              [order_id, concurent.name]
+            );
+            data = { edit: true };
+          }
+        } else if (type === "down") {
+          const concurent = (
+            await queryRunner.query(
+              `select * from categories where order_id <= $1 and name <> $2
+              order by order_id DESC limit 1;
+              `,
+              [order_id, name]
+            )
+          )?.[0];
+          console.log(concurent);
+
+          if (!concurent) data = { edit: false };
+          else {
+            await queryRunner.query(
+              `update categories set order_id = $1 where name = $2`,
+              [Math.min(concurent.order_id, order_id - 1), name]
             );
             await queryRunner.query(
               `update categories set order_id = $1 where name = $2`,

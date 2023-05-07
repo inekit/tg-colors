@@ -282,7 +282,7 @@ export default {
     changeP(e) {
       this.formData.category_name = e.target.value
 
-      const category_description = this.projects?.find(el => el.name === e.target.value)
+      const category_description = this.projects?.find(el => el.name === e.target.value)?.description
       category_description && this.$refs.postTextEditor.pasteHTML(
         marked.parse(category_description?.replaceAll("\r\n\r\n", "<span><br/><span/>\r\n\r\n")))
     },

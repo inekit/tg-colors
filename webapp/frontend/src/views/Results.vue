@@ -6,7 +6,7 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
 
     <MasonryWall class="results-block" :items="$store.state.results ?? []" :ssr-columns="3" :column-width="bodyWidth / 9"
-        :gap="12">
+        :gap="12" fit-width="true">
         <template #default="{ item, index }">
             <div class="result-item">
                 <router-link

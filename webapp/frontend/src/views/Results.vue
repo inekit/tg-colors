@@ -12,7 +12,7 @@
                 <router-link
                     :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
                     <div class="img-container">
-                        <img :src="`/colorsserver/public/pics/${item.image_list?.[0]}`" />
+                        <img :src="`/pics/${item.image_list?.[0]}`" />
                     </div>
                     <div class="text-container">
                         <h2>{{ item.title }}</h2>

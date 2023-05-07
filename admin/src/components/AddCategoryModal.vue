@@ -67,13 +67,13 @@ export default {
     return { formValid: false, preview: "" }
   },
   mounted() {
-    this.preview = `${this.$store.state.publicPath}/public/pics/${this.formData.preview}`
+    this.preview = `${this.$store.state.serverAddr}/pics/${this.formData.preview}`
     this.old_name = this.formData.name
 
   },
   updated() {
     this.formValid = false
-    this.preview = `${this.$store.state.publicPath}/public/pics/${this.formData.preview}`
+    this.preview = `${this.$store.state.serverAddr}/pics/${this.formData.preview}`
     this.old_name = this.formData.name
     this.formData.description && this.$refs.postTextEditor.pasteHTML(
       marked.parse(this.formData.description?.replaceAll("\r\n\r\n", "<span><br/><span/>\r\n\r\n")))

@@ -9,7 +9,7 @@
             <div class="result-item">
                 <router-link :to="`/results/${$store.state.userId}?category=${item.name}`">
                     <div class="img-container">
-                        <img :src="`/colorsserver/public/pics/${item.preview}`" />
+                        <img :src="`/pics/${item.preview}`" />
                     </div>
                     <div class="text-container">
                         <h2>{{ item.name }}</h2>

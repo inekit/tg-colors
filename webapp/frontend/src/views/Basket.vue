@@ -7,7 +7,7 @@
         <div class="basket-item" v-for="item, id in basketItems" :key="id">
             <RouterLink :to="getItemLink(item)">
                 <div class="img-container">
-                    <img :src="`/colorsserver/public/pics/${item.image_list?.[0]}`" />
+                    <img :src="`/pics/${item.image_list?.[0]}`" />
                 </div>
                 <span class="title">
                     {{ item.title + (item.mainside_id ? " (обратная)" : "") }}

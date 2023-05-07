@@ -7,9 +7,8 @@
         <carousel>
             <slide class="carousel__item" v-for="img_link, img_id in item.image_list" :key="img_id">
                 <img v-if="['webp', 'jpg', 'jpeg', 'png'].includes(img_link?.split('.')?.reverse()[0]?.toLowerCase())"
-                    :src="`/colorsserver/public/pics/${img_link}`" />
-                <video style="max-height: 100%;max-width: 100%;" v-else :src="`/colorsserver/public/pics/${img_link}`"
-                    controls>
+                    :src="`/pics/${img_link}`" />
+                <video style="max-height: 100%;max-width: 100%;" v-else :src="`/pics/${img_link}`" controls>
                     Ваш браузер не поддерживает видео
                 </video>
             </slide>
@@ -399,7 +398,7 @@ h1 {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    max-height: 100vw;
+    max-height: 140vw;
 
     img {
         width: 100vw;

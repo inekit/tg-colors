@@ -193,7 +193,7 @@ export default {
 
     console.log(this.options_object, this.options_object_backside)
 
-    this.preview_list = this.formData.image_list?.filter(el => el)?.map(preview_name => `${this.$store.state.publicPath}/public/pics/${preview_name}`)
+    this.preview_list = this.formData.image_list?.filter(el => el)?.map(preview_name => `${this.$store.state.serverAddr}/pics/${preview_name}`)
 
     document.getElementsByClassName('ql-toolbar')?.[0]?.classList.add('hidden')
   },

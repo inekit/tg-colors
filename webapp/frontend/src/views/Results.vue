@@ -221,13 +221,13 @@ export default {
         position: relative;
 
         &:nth-child(4n) {
-            margin-top: -6vw
+            // margin-top: -6vw
         }
 
         &:nth-child(4n+1),
         &:nth-child(4n) {
             .img-container {
-                height: 40vw;
+                //height: 40vw;
             }
         }
 
@@ -235,7 +235,7 @@ export default {
             //position: absolute;
             background-color: #414141;
             width: 100%;
-            height: 20vw;
+            height: 40vw;
             position: relative;
             overflow: hidden;
         }
@@ -291,11 +291,11 @@ export default {
         }
 
         &:nth-child(2n-1) {
-            margin-right: 0.5rem;
+            //margin-right: 0.5rem;
         }
 
         &:nth-child(2n) {
-            margin-left: 0.5rem;
+            //margin-left: 0.5rem;
         }
 
         .favorite-toggle {

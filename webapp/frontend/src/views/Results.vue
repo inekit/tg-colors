@@ -210,7 +210,8 @@ export default {
         //margin: 1rem;
         //margin-bottom: 0;
         margin: 0;
-        flex: 1 1 calc((100% / 3) - 2rem) !important;
+        // flex: 1 1 calc((100% / 3) - 2rem) !important;
+        flex: 0 0 calc(33% - 7.2px) !important;
 
         border-radius: 1rem;
         display: block;

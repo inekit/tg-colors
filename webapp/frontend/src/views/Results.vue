@@ -13,7 +13,7 @@
                     :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
                     <div class="img-container">
                         <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
-                            :onError="`this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
+                            :onerror="`javascript:this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
                     </div>
                     <div class="text-container">
                         <h2>{{ item.title }}</h2>

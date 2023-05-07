@@ -123,10 +123,10 @@ class UsersService {
         if (type) {
           const concurent = (
             await queryRunner.query(
-              `select * from categories where order_id >= $1
+              `select * from categories where order_id >= $1 and name <> $2
               order by order_id limit 1;
               `,
-              [order_id]
+              [order_id, name]
             )
           )?.[0];
           console.log(concurent);

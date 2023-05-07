@@ -93,6 +93,7 @@ export default {
       return myApi
         .put(this.$store.state.publicPath + '/api/admin/categories/', {
           order_id: item.order_id,
+          name: item.name,
           type,
         })
         .then(() => {

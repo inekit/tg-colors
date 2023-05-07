@@ -121,25 +121,25 @@ class UsersService {
       try {
         let data;
         if (type) {
-          const concurent_order_id = (
+          const concurent = (
             await queryRunner.query(
-              `select * from categories where order_id >= $1
+              `select * from categories where order_id > $1
               order by order_id desc limit 1;
               `,
               [order_id]
             )
-          )?.[0]?.order_id;
+          )?.[0];
           console.log(concurent_order_id);
 
           if (!concurent_order_id) data = { edit: false };
           else {
             await queryRunner.query(
               `update categories set order_id = $1 where order_id = $2`,
-              [Math.max(concurent_order_id, order_id + 1), order_id]
+              [Math.max(concurent.order_id, order_id + 1), name]
             );
             await queryRunner.query(
-              `update categories set order_id = $1 where order_id = $2`,
-              [order_id, concurent_order_id]
+              `update categories set order_id = $1 where name = $2`,
+              [order_id, concurent.name]
             );
             data = { edit: true };
           }

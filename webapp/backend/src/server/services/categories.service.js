@@ -124,7 +124,7 @@ class UsersService {
           const concurent = (
             await queryRunner.query(
               `select * from categories where order_id >= $1
-              order by order_id desc limit 1;
+              order by order_id limit 1;
               `,
               [order_id]
             )

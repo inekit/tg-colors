@@ -36,7 +36,7 @@ module.exports = new EntitySchema({
     },
     order_id: {
       type: "int",
-      generated: "uuid",
+      generated: "rowid",
       nullable: true,
     },
   },

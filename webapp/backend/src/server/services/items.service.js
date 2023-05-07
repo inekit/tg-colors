@@ -237,7 +237,7 @@ class UsersService {
                   await this.saveReturningFileName(preview, id === 0)
               )
             )
-          : [await this.saveReturningFileName(previewsBinary)];
+          : [await this.saveReturningFileName(previewsBinary, true)];
         const images_array = Array.isArray(images) ? images : [images];
 
         fNameFullPaths = [

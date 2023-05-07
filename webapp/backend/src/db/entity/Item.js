@@ -35,8 +35,7 @@ module.exports = new EntitySchema({
     },
     order_id: {
       type: "int",
-      generatedType: "STORED",
-      asExpression: "id",
+      dafault: () => "id",
     },
   },
   relations: {

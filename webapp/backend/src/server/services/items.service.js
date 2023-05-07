@@ -307,6 +307,8 @@ class UsersService {
     return new Promise(async (res, rej) => {
       const images_array = Array.isArray(images) ? images : [images];
 
+      console.log(images_array.length, images_array.length === 0);
+
       let fNameFullPaths = Array.isArray(previewsBinary)
         ? await Promise.all(
             previewsBinary.map(

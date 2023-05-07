@@ -5,21 +5,21 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
 
+    <div class="results-block">
+        <div class="result-item" v-for="item, index in $store.state.results ?? []">
+            <router-link
+                :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
+                <div class="img-container">
+                    <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
+                        :onerror="`javascript:this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
+                </div>
+                <div class="text-container">
+                    <h2>{{ item.title }}</h2>
+                    <h3 hidden>От {{ getMinPrice(item.options_array) }} ₽</h3>
 
-    <div class="result-item" v-for="item, index in $store.state.results ?? []">
-        <router-link
-            :to="`/items/${item.id}?mainside_id=${mainside_id}&size=${this.backFilters.size}&material=${this.backFilters.material}`">
-            <div class="img-container">
-                <img :src="`/pics/${getPreviewLink(item.image_list?.[0])}`"
-                    :onerror="`javascript:this.onerror=null;this.src='/pics/${item.image_list?.[0]}';`" />
-            </div>
-            <div class="text-container">
-                <h2>{{ item.title }}</h2>
-                <h3 hidden>От {{ getMinPrice(item.options_array) }} ₽</h3>
-
-            </div>
-        </router-link>
-
+                </div>
+            </router-link>
+        </div>
     </div>
 </template>
 

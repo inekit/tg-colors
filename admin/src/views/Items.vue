@@ -1,8 +1,8 @@
 <template>
   <div>
-    <CFormInput class="mb-4" type="text" @input="search" placeholder="Поиск по названию" />
     <AddItemModal :visible="formVisible" :formData="formData" :mode="formMode" />
     <ChangePricesModal :visible="changePricesVisible" />
+    <CFormInput class="mb-4" type="text" @input="search" placeholder="Поиск по названию" />
     <Table :fields="tableFieldNames" :postData="get" :actions="dataActions" :rows="rows" editMode="form" name="Позиции" />
   </div>
 </template>

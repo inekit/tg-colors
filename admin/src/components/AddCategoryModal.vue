@@ -17,8 +17,8 @@
         <div class="border p-2 mt-3 preview-container">
           <img :src="preview" class="img-fluid" />
         </div>
-        <CFormTextarea v-model="formData.description" placeholder="Описание" id="inputDescription"
-          aria-describedby="inputGroupPrepend" required />
+        <QuillEditor theme="snow" toolbar="essential" ref="postTextEditor" id="postTextEditor"
+          placeholder="Краткое описание" />
       </CForm>
       <div class="types-list">
         <span>Обратная сторона</span>
@@ -44,8 +44,13 @@ const myApi = axios.create({
   withCredentials: true,
 })
 import eventBus from '../eventBus'
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css'
+import TurndownService from 'turndown'
+import { marked } from 'marked'
 
 export default {
+  components: { QuillEditor },
   props: {
     mode: {
       required: true,
@@ -70,6 +75,8 @@ export default {
     this.formValid = false
     this.preview = `${this.$store.state.publicPath}/public/pics/${this.formData.preview}`
     this.old_name = this.formData.name
+    this.formData.description && this.$refs.postTextEditor.pasteHTML(
+      marked.parse(this.formData.description?.replaceAll("\r\n\r\n", "<span><br/><span/>\r\n\r\n")))
   },
   methods: {
     addNewProject() {
@@ -90,7 +97,13 @@ export default {
 
       formData.append('backside_available', this.formData.backside_available)
 
-      formData.append('description', this.formData.description)
+      const turndownService = new TurndownService({
+        headingStyle: "atx",
+      })
+      formData.append(
+        'description',
+        turndownService.turndown(this.$refs.postTextEditor.getHTML()),
+      )
 
       return formData
     },

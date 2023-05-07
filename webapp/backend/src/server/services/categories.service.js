@@ -17,6 +17,19 @@ class UsersService {
     this.edit = this.edit.bind(this);
   }
 
+  getAll({ page, take }) {
+    return new Promise(async (res, rej) => {
+      const connection = await tOrmCon;
+
+      connection
+        .query(`select * from categories order by order_id desc`, [])
+        .then(async (data) => {
+          return res(data);
+        })
+        .catch((error) => rej(new MySqlError(error)));
+    });
+  }
+
   async saveReturningFileName(image) {
     if (typeof image === String) return image;
 

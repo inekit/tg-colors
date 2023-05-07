@@ -7,8 +7,8 @@ const categoriesService = require("../services/categories.service");
 function getAll(req, res, next) {
   console.log(req.query.category);
   if (!req.query.id)
-    servicePreset
-      .get(req.query.id, req.query.page, 100)
+    categoriesService
+      .get({ page: req.query.page, take: 100 })
       .then((data) => res.send(data))
       .catch((error) => next(error));
   else getOne(req, res);

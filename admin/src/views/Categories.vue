@@ -31,6 +31,8 @@ export default {
         Позиции: { action: this.routeToPosts, color: 'primary' },
         Изменить: { action: this.change, color: 'warning' },
         Удалить: { action: this.delete, color: 'danger' },
+        '▲': { action: this.putLower, color: 'secondary' },
+        '▼': { action: this.putHigrer, color: 'secondary' },
       },
       tableFieldNames: [
         {
@@ -86,6 +88,24 @@ export default {
           eventBus.$emit('noresponse', error)
           return false
         })
+    },
+    putHigrer(item, type = 'up') {
+      return myApi
+        .put(this.$store.state.publicPath + '/api/admin/categories/', {
+          order_id: item.order_id,
+          type,
+        })
+        .then(() => {
+          this.get()
+          //this.rows = this.rows.filter((el) => el.id !== id)
+          eventBus.$emit('projectDeleted')
+        })
+        .catch((error) => {
+          eventBus.$emit('noresponse', error)
+        })
+    },
+    putLower(item) {
+      this.putHigrer(item, 'down')
     },
     delete(item) {
 

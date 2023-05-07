@@ -104,6 +104,8 @@ class UsersService {
     image,
     previewBinary,
     backside_available,
+    type,
+    order_id,
   }) {
     return new Promise(async (res, rej) => {
       const fNameFullPath = await this.saveReturningFileName(previewBinary);
@@ -117,20 +119,44 @@ class UsersService {
       await queryRunner.startTransaction();
 
       try {
-        const data = await queryRunner.manager
-          .getRepository("Category")
-          .createQueryBuilder()
-          .update({
-            name,
-            description,
-            backside_available,
-            preview: fNameFullPath,
-          })
-          .where({
-            name: old_name,
-          })
-          .returning("*")
-          .execute();
+        let data;
+        if (type) {
+          const concurent_order_id = (
+            await queryRunner.query(
+              `select * from categories where order_id > $1
+              order by order_id desc limit 1;
+              `,
+              [order_id]
+            )
+          )?.[0]?.order_id;
+
+          if (!concurent_order_id) data = { edit: false };
+          else {
+            await queryRunner.query(
+              `update categories set order_id = $1 where order_id = $2`,
+              [concurent_order_id, order_id]
+            );
+            await queryRunner.query(
+              `update categories set order_id = $1 where order_id = $2`,
+              [order_id, concurent_order_id]
+            );
+            data = { edit: true };
+          }
+        } else
+          data = await queryRunner.manager
+            .getRepository("Category")
+            .createQueryBuilder()
+            .update({
+              name,
+              description,
+              backside_available,
+              preview: fNameFullPath,
+            })
+            .where({
+              name: old_name,
+            })
+            .returning("*")
+            .execute();
 
         await queryRunner.commitTransaction();
 

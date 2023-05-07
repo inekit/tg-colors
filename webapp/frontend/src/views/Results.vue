@@ -154,7 +154,7 @@ export default {
             const results = await this.$store.state.myApi.get(this.$store.state.restAddr + subPath, {
                 params: {
                     searchQuery: this.$store.state.searchQuery,
-                    take: 10,
+                    take: 18,
                     page: this.page ?? 1,
                     sort: this.$store.state.filters.sort_type,
                     category: this.$store.state.filters.category_name,

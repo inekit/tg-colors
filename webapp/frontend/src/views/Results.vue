@@ -285,7 +285,11 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
-                width: 100%;
+                max-width: 300%;
+                max-height: 130%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
                 height: auto;
             }
         }

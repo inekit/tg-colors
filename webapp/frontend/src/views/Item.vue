@@ -482,7 +482,7 @@ form {
             background-color: #E6E6E6;
             border-radius: 10px;
             color: #414141;
-            color: var(--tg-theme-text-color);
+            //color: var(--tg-theme-text-color);
 
             select {
                 font-size: 15px;
@@ -495,7 +495,7 @@ form {
                 -moz-appearance: none;
                 appearance: none;
                 color: #414141 !important;
-                color: var(--tg-theme-text-color) !important;
+                //color: var(--tg-theme-text-color) !important;
 
                 &:focus,
                 &:active {
@@ -571,6 +571,8 @@ form {
         border-top: 1px rgba(192, 192, 192, 0.363) solid;
         background-color: white;
         background-color: var(--tg-theme-bg-color);
+        color: #414141;
+        color: var(--tg-theme-text-color);
 
         .count-select {
             position: absolute;
@@ -580,7 +582,7 @@ form {
             padding: 15px 40px;
             font-size: 13px;
             color: #414141;
-            color: var(--tg-theme-text-color);
+            //color: var(--tg-theme-text-color);
             border: none;
             top: 12px;
             width: 50px;
@@ -591,7 +593,7 @@ form {
                 display: block;
                 width: 9px;
                 color: #414141;
-                color: var(--tg-theme-text-color);
+                //color: var(--tg-theme-text-color);
             }
 
             &>button {
@@ -604,7 +606,7 @@ form {
                 width: 47px;
                 border-radius: 14px;
                 color: #414141;
-                color: var(--tg-theme-text-color);
+                //color: var(--tg-theme-text-color);
 
                 &:first-child {
                     left: 0;

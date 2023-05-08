@@ -264,6 +264,7 @@ export default {
                 margin: 0;
                 width: 100%;
                 color: #414141;
+                color: var(--tg-theme-text-color);
                 font-weight: 400;
                 font-size: 1.1rem;
                 word-wrap: break-word;
@@ -273,6 +274,7 @@ export default {
             h3 {
                 margin: 5px 0 -5px 0;
                 color: #414141;
+                color: var(--tg-theme-text-color);
                 font-weight: 200;
                 font-size: 1rem;
             }

@@ -115,6 +115,7 @@ export default {
 .search-block {
     margin: 1rem;
     position: relative;
+    background: transparent;
 
     input[type="search"] {
         width: 100%;
@@ -223,6 +224,8 @@ export default {
         transform: translateY(-300px);
         padding: 1rem;
         background-color: white;
+        background-color: var(--tg-theme-bg-color);
+
         box-shadow: 0 1rem 1rem rgba(165, 165, 165, 0.404);
         z-index: 999;
         transition: all ease-out 0.3s;
@@ -251,6 +254,8 @@ export default {
 
         &>span {
             color: #414141;
+            color: var(--tg-theme-text-color);
+
             font-weight: 500;
             font-size: 1.2rem;
             line-height: 35px;

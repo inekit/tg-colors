@@ -215,8 +215,7 @@ export default {
 
         border-radius: 1rem;
         display: block;
-        background-color: white;
-        background-color: var(--tg-theme-bg-color);
+        background-color: transparent;
         // border: 1px solid rgb(169, 169, 169);
         box-shadow: 0px 1px 5px rgb(216, 216, 216);
         overflow: hidden;

@@ -182,7 +182,7 @@ export default {
         color: #414141;
         color: var(--tg-theme-text-color);
         box-shadow: -1em 0 1em rgba(126, 126, 126, 0.304);
-        box-shadow: -1em 0 1em var(--tg-theme-bg-color);
+        //box-shadow: -1em 0 1em var(--tg-theme-bg-color);
 
         z-index: 998;
         transition: all ease-out 0.3s;

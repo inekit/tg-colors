@@ -1,7 +1,9 @@
 <template>
     <h1>Категории</h1>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250"></InstagramLoader>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
+    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250" secondaryColor="var(--tg-theme-hint-color)">
+    </InstagramLoader>
+    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"
+        :secondaryColor="window.Telegram?.WebApp?.ThemeParams?.hint_color"></InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <MasonryWall class="categories-block" :items="$store.state.categories ?? []" :ssr-columns="2"
         :column-width="bodyWidth / 3" :gap="12">

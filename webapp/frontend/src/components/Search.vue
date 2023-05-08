@@ -122,6 +122,7 @@ export default {
         border-radius: 0.5rem;
         border: 1px solid;
         border-color: #e2e2e2;
+        border-color: 0px 1px 5px var(--tg-theme-hint-color);
         font-size: 1rem;
         padding: 1rem;
         background: transparent;

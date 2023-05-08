@@ -115,7 +115,6 @@ export default {
 .search-block {
     margin: 1rem;
     position: relative;
-    background: transparent;
 
     input[type="search"] {
         width: 100%;
@@ -125,6 +124,7 @@ export default {
         border-color: #e2e2e2;
         font-size: 1rem;
         padding: 1rem;
+        background: transparent;
 
         &:hover {
             border-color: #7090fa;
@@ -176,6 +176,9 @@ export default {
         transform: translateX(calc(100% + 4rem));
         padding: 1rem;
         background-color: white;
+        background-color: var(--tg-theme-bg-color);
+        color: #414141;
+        color: var(--tg-theme-text-color);
         box-shadow: -1em 0 1em rgba(165, 165, 165, 0.404);
         z-index: 998;
         transition: all ease-out 0.3s;
@@ -197,7 +200,6 @@ export default {
 
         &>span {
             opacity: 0;
-            color: #414141;
             font-weight: 500;
             font-size: 20px;
             line-height: 35px;
@@ -225,6 +227,8 @@ export default {
         padding: 1rem;
         background-color: white;
         background-color: var(--tg-theme-bg-color);
+        color: #414141;
+        color: var(--tg-theme-text-color);
 
         box-shadow: 0 1rem 1rem rgba(165, 165, 165, 0.404);
         z-index: 999;
@@ -253,9 +257,6 @@ export default {
         }
 
         &>span {
-            color: #414141;
-            color: var(--tg-theme-text-color);
-
             font-weight: 500;
             font-size: 1.2rem;
             line-height: 35px;

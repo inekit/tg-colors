@@ -632,7 +632,7 @@ form {
             background-color: #E6E6E6;
             border-radius: 14px;
             color: #414141;
-            color: var(--tg-theme-text-color);
+            //color: var(--tg-theme-text-color);
             padding: 15px 40px;
             font-size: 13px;
             border: none;
@@ -646,6 +646,8 @@ form {
 
         &>span {
             line-height: 30px;
+            color: #414141 !important;
+            color: var(--tg-theme-text-color) !important;
         }
     }
 
@@ -658,7 +660,7 @@ form {
         font-size: 15px;
         border: none;
         color: #414141 !important;
-        color: var(--tg-theme-text-color) !important;
+        //color: var(--tg-theme-text-color) !important;
 
         &:last-of-type {
             right: 1rem;

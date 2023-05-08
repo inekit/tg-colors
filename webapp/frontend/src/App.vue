@@ -24,6 +24,8 @@ html,
 body {
   height: fit-content;
   overflow-x: hidden;
+  background-color: white;
+  background-color: var(--tg-theme-bg-color);
 
   .h-100 {
     height: 100vh;
@@ -53,6 +55,7 @@ h1 {
   margin: auto 1rem;
   margin-top: 1rem;
   color: #414141;
+  color: var(--tg-theme-text-color);
   font-weight: 600;
 
 }

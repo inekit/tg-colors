@@ -2,7 +2,15 @@
     <div class="search-block">
         <input type="search" :value="$store.state.searchQuery" @change="openResults" placeholder="Поиск.." />
         <div class="sort" @click="toggleSort">
-            <img :src="require('@/assets/img/sort.svg')" />
+            <svg fill="#000000" width="800px" height="800px" viewBox="0 0 24 24" id="sort-ascending"
+                xmlns="http://www.w3.org/2000/svg" class="icon multi-color">
+                <path id="primary-stroke" d="M11,15,7,19,3,15m4,4V4"
+                    style="fill: none; stroke: var(--tg-theme-text-color); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                </path>
+                <path id="secondary-stroke" d="M20,16H16m4-5H14m6-5H11"
+                    style="fill: none; stroke: rgb(44, 169, 188); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                </path>
+            </svg>
         </div>
         <div class="categories" @click="toggleCategories">
             <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,8 +186,10 @@ export default {
 
     .categories>img,
     .categories>svg,
-    .sort>img {
+    .sort>img,
+    .sort>svg {
         width: 30px;
+        height: 30px;
     }
 
     .categories-list {

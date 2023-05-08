@@ -180,7 +180,7 @@ class UsersService {
             );
             data = { edit: true };
           }
-        } else
+        } else {
           data = await queryRunner.manager
             .getRepository("Category")
             .createQueryBuilder()
@@ -196,17 +196,18 @@ class UsersService {
             .returning("*")
             .execute();
 
-        await queryRunner.manager
-          .getRepository("Item")
-          .createQueryBuilder()
-          .update({
-            description,
-          })
-          .where({
-            category_name: old_name,
-          })
-          .returning("*")
-          .execute();
+          await queryRunner.manager
+            .getRepository("Item")
+            .createQueryBuilder()
+            .update({
+              description,
+            })
+            .where({
+              category_name: old_name,
+            })
+            .returning("*")
+            .execute();
+        }
 
         await queryRunner.commitTransaction();
 

@@ -152,7 +152,10 @@ export default {
 
         border-radius: 1rem;
         display: block;
-        background: rgb(255, 255, 255);
+        background-color: white;
+        background-color: var(--tg-theme-bg-color);
+        color: #414141;
+        color: var(--tg-theme-text-color);
         box-shadow: 0px 1px 5px rgb(216, 216, 216);
         overflow: hidden;
         position: relative;
@@ -170,6 +173,7 @@ export default {
 
         .img-container {
             background-color: #414141;
+            background-color: var(--tg-theme-text-color);
             width: 100%;
             height: 30vw;
             position: relative;
@@ -192,6 +196,7 @@ export default {
                 margin: 0;
                 width: 100%;
                 color: #414141;
+                color: var(--tg-theme-text-color);
                 font-weight: 400;
                 font-size: 1.1rem;
                 text-align: center;

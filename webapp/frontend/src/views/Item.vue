@@ -460,6 +460,7 @@ form {
         font-size: 1.1rem;
         font-weight: 600;
         color: #414141;
+        color: var(--tg-theme-text-color);
     }
 
     .option-select {
@@ -481,6 +482,7 @@ form {
             background-color: #E6E6E6;
             border-radius: 10px;
             color: #414141;
+            color: var(--tg-theme-text-color);
 
             select {
                 font-size: 15px;
@@ -493,6 +495,7 @@ form {
                 -moz-appearance: none;
                 appearance: none;
                 color: #414141 !important;
+                color: var(--tg-theme-text-color) !important;
 
                 &:focus,
                 &:active {
@@ -529,6 +532,7 @@ form {
             margin: 0;
             font-weight: 400;
             color: #414141;
+            color: var(--tg-theme-text-color);
         }
 
         p {
@@ -566,6 +570,7 @@ form {
         padding: 12px 1rem;
         border-top: 1px rgba(192, 192, 192, 0.363) solid;
         background-color: white;
+        background-color: var(--tg-theme-bg-color);
 
         .count-select {
             position: absolute;
@@ -575,6 +580,7 @@ form {
             padding: 15px 40px;
             font-size: 13px;
             color: #414141;
+            color: var(--tg-theme-text-color);
             border: none;
             top: 12px;
             width: 50px;
@@ -584,12 +590,12 @@ form {
                 margin-right: auto;
                 display: block;
                 width: 9px;
-                color: rgb(44, 44, 44);
+                color: #414141;
+                color: var(--tg-theme-text-color);
             }
 
             &>button {
                 border: none;
-                color: rgb(44, 44, 44);
                 height: 47px;
                 position: absolute;
                 right: 0;
@@ -598,6 +604,7 @@ form {
                 width: 47px;
                 border-radius: 14px;
                 color: #414141;
+                color: var(--tg-theme-text-color);
 
                 &:first-child {
                     left: 0;
@@ -617,6 +624,7 @@ form {
             background-color: #E6E6E6;
             border-radius: 14px;
             color: #414141;
+            color: var(--tg-theme-text-color);
             padding: 15px 40px;
             font-size: 13px;
             border: none;
@@ -642,6 +650,7 @@ form {
         font-size: 15px;
         border: none;
         color: #414141 !important;
+        color: var(--tg-theme-text-color) !important;
 
         &:last-of-type {
             right: 1rem;

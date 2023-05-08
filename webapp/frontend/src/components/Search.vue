@@ -181,7 +181,7 @@ export default {
         background-color: var(--tg-theme-bg-color);
         color: #414141;
         color: var(--tg-theme-text-color);
-        box-shadow: -1em 0 1em rgba(165, 165, 165, 0.404);
+        box-shadow: -1em 0 1em rgba(126, 126, 126, 0.304);
         //box-shadow: -1em 0 1em var(--tg-theme-bg-color);
 
         z-index: 998;
@@ -235,7 +235,8 @@ export default {
         color: var(--tg-theme-text-color);
 
         box-shadow: 0 1rem 1rem rgba(165, 165, 165, 0.404);
-        box-shadow: 0 1rem 1rem var(--tg-theme-bg-color);
+        box-shadow: -1em 0 1em rgba(126, 126, 126, 0.304);
+
 
         z-index: 999;
         transition: all ease-out 0.3s;

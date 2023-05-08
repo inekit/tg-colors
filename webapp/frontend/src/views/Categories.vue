@@ -1,8 +1,8 @@
 <template>
     <h1>Категории</h1>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250" secondaryColor="var(--tg-theme-hint-color)">
+    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250">
     </InstagramLoader>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200" :secondaryColor="preloaderColor">
+    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200">
     </InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <MasonryWall class="categories-block" :items="$store.state.categories ?? []" :ssr-columns="2"
@@ -28,7 +28,7 @@ import searchBlock from '@/components/Search.vue';
 import eventBus from '../eventBus'
 import { ListLoader, InstagramLoader } from 'vue-content-loader'
 
-
+//primaryColor="var(--tg-theme-hint-color)"
 export default {
     components: { searchBlock, InstagramLoader },
     data() {

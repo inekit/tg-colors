@@ -535,6 +535,12 @@ form {
             color: var(--tg-theme-text-color);
         }
 
+        ul,
+        li {
+            color: #414141;
+            color: var(--tg-theme-text-color);
+        }
+
         p {
             font-size: 1rem;
         }

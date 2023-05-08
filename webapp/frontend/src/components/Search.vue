@@ -138,6 +138,7 @@ export default {
         border-radius: 0.5rem;
         border: 0px solid;
         border-color: #e2e2e2;
+        border-color: 0px 1px 5px var(--tg-theme-hint-color);
         margin: 15px 0 0 5px;
 
         &:hover {
@@ -180,6 +181,8 @@ export default {
         color: #414141;
         color: var(--tg-theme-text-color);
         box-shadow: -1em 0 1em rgba(165, 165, 165, 0.404);
+        box-shadow: -1em 0 1em var(--tg-theme-hint-color);
+
         z-index: 998;
         transition: all ease-out 0.3s;
         overflow: scroll;

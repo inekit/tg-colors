@@ -236,7 +236,8 @@ export default {
             //position: absolute;
             background-color: #414141;
             width: 100%;
-            height: 40vw;
+            height: calc(32vw - 1rem);
+
             position: relative;
             overflow: hidden;
         }
@@ -252,10 +253,10 @@ export default {
 
             //margin: 1rem;
             .text-container {
-                padding: 1rem;
+                padding: 0.7rem;
                 //position: absolute;
                 top: 70%;
-                width: calc(100% - 2rem);
+                width: calc(100% - 1.4rem);
 
             }
 

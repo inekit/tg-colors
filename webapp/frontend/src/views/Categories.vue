@@ -2,8 +2,8 @@
     <h1>Категории</h1>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250" secondaryColor="var(--tg-theme-hint-color)">
     </InstagramLoader>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"
-        :secondaryColor="window.Telegram?.WebApp?.ThemeParams?.hint_color"></InstagramLoader>
+    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200" :secondaryColor="preloaderColor">
+    </InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <MasonryWall class="categories-block" :items="$store.state.categories ?? []" :ssr-columns="2"
         :column-width="bodyWidth / 3" :gap="12">
@@ -69,6 +69,11 @@ export default {
     async beforeUnmount() {
         window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
         window.Telegram?.WebApp.MainButton.hide();
+    },
+    computed: {
+        preloaderColor() {
+            return window.Telegram?.WebApp?.ThemeParams?.hint_color
+        }
     },
     methods: {
         routeToBasket() {

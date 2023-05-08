@@ -122,7 +122,7 @@ export default {
         border-radius: 0.5rem;
         border: 1px solid;
         border-color: #e2e2e2;
-        border-color: 0px 1px 5px var(--tg-theme-hint-color);
+        border-color: var(--tg-theme-hint-color);
         font-size: 1rem;
         padding: 1rem;
         background: transparent;
@@ -139,7 +139,7 @@ export default {
         border-radius: 0.5rem;
         border: 0px solid;
         border-color: #e2e2e2;
-        border-color: 0px 1px 5px var(--tg-theme-hint-color);
+        border-color: var(--tg-theme-hint-color);
         margin: 15px 0 0 5px;
 
         &:hover {
@@ -235,6 +235,8 @@ export default {
         color: var(--tg-theme-text-color);
 
         box-shadow: 0 1rem 1rem rgba(165, 165, 165, 0.404);
+        box-shadow: 0 1rem 1rem var(--tg-theme-hint-color);
+
         z-index: 999;
         transition: all ease-out 0.3s;
 

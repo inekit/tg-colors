@@ -233,6 +233,7 @@ export default {
             line-height: 35px;
             display: block;
             margin-bottom: 20px;
+            margin-top: 8px;
         }
 
         &.shown {

@@ -164,7 +164,7 @@ export default {
         color: #414141;
         color: var(--tg-theme-text-color);
         box-shadow: 0px 1px 5px rgb(216, 216, 216);
-        box-shadow: 0px 1px 5px var(--tg-theme-hint-color);
+        //box-shadow: 0px 1px 5px var(--tg-theme-hint-color);
 
         overflow: hidden;
         position: relative;

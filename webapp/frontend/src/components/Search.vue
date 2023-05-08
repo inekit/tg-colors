@@ -182,7 +182,7 @@ export default {
         color: #414141;
         color: var(--tg-theme-text-color);
         box-shadow: -1em 0 1em rgba(165, 165, 165, 0.404);
-        box-shadow: -1em 0 1em var(--tg-theme-hint-color);
+        //box-shadow: -1em 0 1em var(--tg-theme-bg-color);
 
         z-index: 998;
         transition: all ease-out 0.3s;
@@ -235,7 +235,7 @@ export default {
         color: var(--tg-theme-text-color);
 
         box-shadow: 0 1rem 1rem rgba(165, 165, 165, 0.404);
-        box-shadow: 0 1rem 1rem var(--tg-theme-hint-color);
+        box-shadow: 0 1rem 1rem var(--tg-theme-bg-color);
 
         z-index: 999;
         transition: all ease-out 0.3s;

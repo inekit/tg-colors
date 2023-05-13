@@ -170,6 +170,7 @@ export default {
         },
         scroll() {
             window.onscroll = async (e) => {
+                console.log(2)
                 let bottomwindow = window.scrollY + window.innerHeight + 2000 > document.documentElement.scrollHeight;
 
                 if (bottomwindow && !this.loadingUpdate && !this.isEnded) {

@@ -54,6 +54,7 @@ export default {
         }
     },
     async beforeMount() {
+        console.log(1)
         this.bodyWidth = document.body.clientHeight
         this.scroll()
         window.Telegram?.WebApp.BackButton.onClick(this.routeBack);

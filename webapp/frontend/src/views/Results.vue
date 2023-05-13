@@ -61,6 +61,8 @@ export default {
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
             const elements = document.getElementsByClassName('preloader')
+            console.log(this.$store.state.results, elements)
+
             for (let el of elements) {
                 el.classList.add("hidden")
             }

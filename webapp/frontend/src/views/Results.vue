@@ -277,10 +277,10 @@ export default {
             background-color: #414141;
             width: 100%;
             height: calc(32vw - 1rem);
-            flex: 1;
-
-            position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
 
@@ -323,11 +323,7 @@ export default {
             img {
                 min-width: 100%;
                 min-height: 100%;
-                width: auto;
-                height: auto;
-                position: absolute;
-                left: 0;
-                top: 0;
+                flex-shrink: 0;
             }
         }
 

@@ -61,13 +61,13 @@ export default {
 
         console.log(this.$store.state.scrollTopResults)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
-            document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
             console.log(this.$store.state.results, elements)
 
             for (let el of elements) {
                 el.classList.add("hidden")
             }
             this.$refs['results-block']?.classList.remove("hidden")
+            this.page = this.$store.state.page ?? 0
             document.body.classList.remove('stop-scrolling')
             window.scrollTo(0, this.$store.state.scrollTopResults ?? 0);
 
@@ -103,6 +103,8 @@ export default {
 
     },
     async mounted() {
+        window.scrollTo(0, this.$store.state.scrollTopResults ?? 0);
+
     },
     async beforeUnmount() {
         window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
@@ -110,8 +112,7 @@ export default {
         window.Telegram?.WebApp.BackButton.offClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.hide();
         this.$store.state.scrollTopResults = window.scrollY
-        console.log(this.$store.state.scrollTopResults)
-
+        this.$store.state.page = this.page
     },
     methods: {
         routeToBasket() {

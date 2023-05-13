@@ -48,7 +48,8 @@ const router = createRouter({
   //history: createWebHashHistory(process.env.BASE_URL),
   history: createWebHistory('/colorsfront/'),
   routes,
-  scrollBehavior() {
+  scrollBehavior(to, from, savedPosition) {
+    console.log(to, from, savedPosition)
     // always scroll to top
     return { top: 0 }
   },

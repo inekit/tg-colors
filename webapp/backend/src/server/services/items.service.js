@@ -43,9 +43,9 @@ class UsersService {
         sort === "newing"
           ? "publication_date DESC"
           : sort === "ascending"
-          ? "price"
+          ? "lower(title)"
           : sort === "descending"
-          ? "price DESC"
+          ? "lower(title) DESC"
           : "order_id DESC";
 
       console.log(orderQueryPart);

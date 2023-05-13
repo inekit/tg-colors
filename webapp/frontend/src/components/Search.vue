@@ -30,8 +30,9 @@
         </div>
         <div ref="sort-list" class="sort-list">
             <span>Сортировать по</span>
-            <div v-for="sort_value, sort_key in { default: 'По умолчанию', newing: 'Новизна', ascending: 'По возрастанию цены',
-                descending: 'По убыванию цены'
+            <div v-for="sort_value, sort_key in {
+                default: 'По умолчанию', newing: 'Новизна', ascending: 'По возрастанию',
+                descending: 'По убыванию'
             }">
                 <label :for="sort_key">{{ sort_value }}</label>
                 <input :id="sort_key" :checked="sort_key === $store.state.filters.sort_type" @click="changeSort"

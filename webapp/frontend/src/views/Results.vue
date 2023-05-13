@@ -266,8 +266,8 @@ export default {
                 color: #414141;
                 color: var(--tg-theme-text-color);
                 font-weight: 400;
-                font-size: 1.1rem;
-                word-wrap: break-word;
+                font-size: 3.8vw;
+                //word-wrap: break-word;
                 text-align: center;
             }
 

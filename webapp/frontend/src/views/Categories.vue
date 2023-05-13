@@ -207,7 +207,7 @@ export default {
                 color: #414141;
                 color: var(--tg-theme-text-color);
                 font-weight: 400;
-                font-size: 1.1rem;
+                font-size: 4vw;
                 text-align: center;
                 word-wrap: break-word;
             }

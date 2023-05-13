@@ -150,6 +150,7 @@ export default {
         },
         async updatePage(delay) {
             console.log(123)
+            this.loadingUpdate = true;
             this.$store.state.results = await this.sendSearchRequest(true);
 
             this.$refs['results-block']?.classList.add("hidden")

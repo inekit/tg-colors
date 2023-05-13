@@ -60,32 +60,40 @@ export default {
         console.log(234234, (forward === 'i' || forward === 'b'), this.$store.state.results?.length > 0)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
+            const elements = document.getElementsByClassName('preloader')
+            console.log(this.$store.state.results, elements)
 
+            for (let el of elements) {
+                el.classList.add("hidden")
+            }
+            this.$refs['results-block']?.classList.remove("hidden")
+            document.body.classList.remove('stop-scrolling')
 
         } else {
             this.$store.state.results = []
-            this.bodyWidth = document.body.clientHeight
-            this.scroll()
-            window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
-            window.Telegram?.WebApp.BackButton.show();
-
-            let uri = window.location.search.substring(1);
-            this.params = new URLSearchParams(uri)
-            this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
-            this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
-
-            this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
-
-
-            if (await this.haveBasketItems()) {
-                window.Telegram?.WebApp.MainButton.onClick(this.routeToBasket);
-                window.Telegram?.WebApp.MainButton.show();
-                window.Telegram?.WebApp.MainButton.setText("Корзина");
-            } else {
-                window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
-                window.Telegram?.WebApp.MainButton.hide();
-            }
         }
+        this.bodyWidth = document.body.clientHeight
+        this.scroll()
+        window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
+        window.Telegram?.WebApp.BackButton.show();
+
+        let uri = window.location.search.substring(1);
+        this.params = new URLSearchParams(uri)
+        this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
+        this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
+
+        this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
+
+
+        if (await this.haveBasketItems()) {
+            window.Telegram?.WebApp.MainButton.onClick(this.routeToBasket);
+            window.Telegram?.WebApp.MainButton.show();
+            window.Telegram?.WebApp.MainButton.setText("Корзина");
+        } else {
+            window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
+            window.Telegram?.WebApp.MainButton.hide();
+        }
+
     },
     async mounted() {
 

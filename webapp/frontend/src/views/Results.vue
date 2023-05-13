@@ -49,7 +49,7 @@ export default {
         },
         "$store.state.filters": async function () {
             await this.updatePage(300)
-            console.log(1232333323)
+            console.log(this.$store.state.filters)
         },
         async $route(to, from) {
             //await this.toggleButtons()

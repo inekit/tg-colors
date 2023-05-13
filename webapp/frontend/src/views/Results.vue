@@ -58,9 +58,14 @@ export default {
     async beforeMount() {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
         const elements = document.getElementsByClassName('preloader')
+        let uri = window.location.search.substring(1);
+        this.params = new URLSearchParams(uri)
+        this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
+        this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
 
-        console.log(this.$store.state.scrollTopResults)
-        if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
+        this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
+
+        if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0 && !this.mainside_id) {
             console.log(this.$store.state.results, elements)
 
             for (let el of elements) {
@@ -84,13 +89,6 @@ export default {
         window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.show();
 
-        let uri = window.location.search.substring(1);
-        this.params = new URLSearchParams(uri)
-        this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
-        this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
-
-        this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
-
 
         if (await this.haveBasketItems()) {
             window.Telegram?.WebApp.MainButton.onClick(this.routeToBasket);
@@ -107,7 +105,7 @@ export default {
         const elements = document.getElementsByClassName('preloader')
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
 
-        if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) { } else {
+        if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0 && !this.mainside_id) { } else {
             for (let el of elements) {
                 el.classList.remove("hidden")
             }

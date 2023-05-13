@@ -48,8 +48,8 @@ export default {
 
         },
         "$store.state.filters": async function () {
-
-            if (this.$store.state.filters) await this.updatePage(300)
+            await this.updatePage(300)
+            console.log(11212, this.$store.state.filters)
         },
         async $route(to, from) {
             //await this.toggleButtons()

@@ -54,9 +54,9 @@ export default {
         }
     },
     async beforeMount() {
-        const forward = this.$router.options.history.state.forward
+        const forward = this.$router.options.history.state.forward?.substring(1, 2)
         console.log(forward, forward.substring(1, 2), this.$router.options.history.state.scroll.top)
-        if (forward.substring(1, 2) === 'i') {
+        if (forward === 'i' || forward === 'b') {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0
         } else {
             this.$store.state.results = []
@@ -91,7 +91,7 @@ export default {
         window.Telegram?.WebApp.MainButton.hide();
         window.Telegram?.WebApp.BackButton.offClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.hide();
-        this.$store.state.scrollTopResults = this.$router.options.history.state.scroll.top
+        this.$store.state.scrollTopResults = document.body.scrollTop
     },
     methods: {
         routeToBasket() {

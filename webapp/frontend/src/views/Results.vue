@@ -58,6 +58,7 @@ export default {
     },
     async mounted() {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
+        console.log((forward === 'i' || forward === 'b'), this.$store.state.results?.length > 0)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
             const elements = document.getElementsByClassName('preloader')

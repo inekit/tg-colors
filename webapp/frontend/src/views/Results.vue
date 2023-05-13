@@ -45,7 +45,6 @@ export default {
     watch: {
         "$store.state.searchQuery": async function () {
             await this.updatePage(300)
-            console.log(12333333)
 
         },
         "$store.state.filters": async function () {
@@ -54,7 +53,7 @@ export default {
         },
         async $route(to, from) {
             //await this.toggleButtons()
-            console.log(from)
+            console.log(1223232, to, from)
 
         }
     },

@@ -54,27 +54,33 @@ export default {
         }
     },
     async beforeMount() {
-        console.log(this.$router.options.history)
-        this.bodyWidth = document.body.clientHeight
-        this.scroll()
-        window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
-        window.Telegram?.WebApp.BackButton.show();
-
-        let uri = window.location.search.substring(1);
-        this.params = new URLSearchParams(uri)
-        this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
-        this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
-
-        this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
-
-
-        if (await this.haveBasketItems()) {
-            window.Telegram?.WebApp.MainButton.onClick(this.routeToBasket);
-            window.Telegram?.WebApp.MainButton.show();
-            window.Telegram?.WebApp.MainButton.setText("Корзина");
+        const forward = this.$router.options.history.state.forward
+        console.log(forward.substring(1, 1))
+        if (forward.substring(1, 1) === 'i') {
+            document.body.scrollTop = this.$store.state.scrollTopResults
         } else {
-            window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
-            window.Telegram?.WebApp.MainButton.hide();
+            this.$store.state.results = []
+            this.bodyWidth = document.body.clientHeight
+            this.scroll()
+            window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
+            window.Telegram?.WebApp.BackButton.show();
+
+            let uri = window.location.search.substring(1);
+            this.params = new URLSearchParams(uri)
+            this.backFilters = { size: this.params.get('size'), material: this.params.get('material') }
+            this.mainside_id = this.params.get('mainside_id') === "null" ? null : this.params.get('mainside_id')
+
+            this.$store.state.userId = this.$store.state.userId ?? this.$route.params?.userId;
+
+
+            if (await this.haveBasketItems()) {
+                window.Telegram?.WebApp.MainButton.onClick(this.routeToBasket);
+                window.Telegram?.WebApp.MainButton.show();
+                window.Telegram?.WebApp.MainButton.setText("Корзина");
+            } else {
+                window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);
+                window.Telegram?.WebApp.MainButton.hide();
+            }
         }
     },
     async mounted() {
@@ -85,6 +91,7 @@ export default {
         window.Telegram?.WebApp.MainButton.hide();
         window.Telegram?.WebApp.BackButton.offClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.hide();
+        this.$store.state.scrollTopResults = this.$router.options.history.state.scroll.top
     },
     methods: {
         routeToBasket() {

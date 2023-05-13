@@ -55,7 +55,7 @@ export default {
     },
     async beforeMount() {
         const forward = this.$router.options.history.state.forward
-        console.log(forward.substring(1, 1))
+        console.log(this.$router.options.history.state)
         if (forward.substring(1, 1) === 'i') {
             document.body.scrollTop = this.$store.state.scrollTopResults
         } else {

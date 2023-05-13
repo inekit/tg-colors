@@ -54,6 +54,8 @@ export default {
         },
         async $route(to, from) {
             //await this.toggleButtons()
+            console.log(from)
+
         }
     },
     async mounted() {

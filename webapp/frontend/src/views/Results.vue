@@ -44,7 +44,7 @@ export default {
     },
     watch: {
         "$store.state.searchQuery": async function () {
-            //await this.updatePage(300)
+            await this.updatePage(300)
 
         },
         "$store.state.filters": async function () {
@@ -170,7 +170,7 @@ export default {
         },
         scroll() {
             window.onscroll = async (e) => {
-                console.log(2)
+                if (window.scrollY === 0) return;
                 let bottomwindow = window.scrollY + window.innerHeight + 2000 > document.documentElement.scrollHeight;
 
                 if (bottomwindow && !this.loadingUpdate && !this.isEnded) {

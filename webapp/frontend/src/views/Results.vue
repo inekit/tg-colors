@@ -75,6 +75,8 @@ export default {
                 el.classList.remove("hidden")
             }
             this.$store.state.results = []
+            this.$store.state.scrollTopResults = 0;
+
         }
         this.bodyWidth = document.body.clientHeight
         this.scroll()
@@ -100,6 +102,7 @@ export default {
 
     },
     async mounted() {
+        document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
 
     },
     async beforeUnmount() {

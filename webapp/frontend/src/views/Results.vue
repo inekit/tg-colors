@@ -69,6 +69,7 @@ export default {
             }
             this.$refs['results-block']?.classList.remove("hidden")
             document.body.classList.remove('stop-scrolling')
+            window.scrollTo(0, this.$store.state.scrollTopResults ?? 0);
 
         } else {
             for (let el of elements) {
@@ -102,8 +103,6 @@ export default {
 
     },
     async mounted() {
-        document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
-
     },
     async beforeUnmount() {
         window.Telegram?.WebApp.MainButton.offClick(this.routeToBasket);

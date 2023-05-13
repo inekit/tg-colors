@@ -1,9 +1,9 @@
 <template>
     <h1>{{ mainside_id ? "Обратная сторона" : "Каталог" }}</h1>
     <searchBlock />
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 250"></InstagramLoader>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
-    <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
+    <InstagramLoader class="preloader hidden" ref="preloader" viewBox="0 0 300 250"></InstagramLoader>
+    <InstagramLoader class="preloader hidden" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
+    <InstagramLoader class="preloader hidden" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
 
     <div class="results-block">
         <div class="result-item" v-for="item, index in $store.state.results ?? []">
@@ -57,10 +57,11 @@ export default {
     },
     async beforeMount() {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
+        const elements = document.getElementsByClassName('preloader')
+
         console.log(234234, (forward === 'i' || forward === 'b'), this.$store.state.results?.length > 0)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
-            const elements = document.getElementsByClassName('preloader')
             console.log(this.$store.state.results, elements)
 
             for (let el of elements) {
@@ -70,6 +71,9 @@ export default {
             document.body.classList.remove('stop-scrolling')
 
         } else {
+            for (let el of elements) {
+                el.classList.remove("hidden")
+            }
             this.$store.state.results = []
         }
         this.bodyWidth = document.body.clientHeight

@@ -54,6 +54,7 @@ export default {
         }
     },
     async beforeMount() {
+        console.log(this.$router.options.history)
         this.bodyWidth = document.body.clientHeight
         this.scroll()
         window.Telegram?.WebApp.BackButton.onClick(this.routeBack);
@@ -77,7 +78,6 @@ export default {
         }
     },
     async mounted() {
-        console.log(1)
 
     },
     async beforeUnmount() {

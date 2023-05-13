@@ -53,23 +53,14 @@ export default {
         },
         async $route(to, from) {
             //await this.toggleButtons()
-            console.log(1223232, to, from)
-
         }
     },
-    async mounted() {
+    async beforeMount() {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
         console.log(234234, (forward === 'i' || forward === 'b'), this.$store.state.results?.length > 0)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
-            const elements = document.getElementsByClassName('preloader')
-            console.log(this.$store.state.results, elements)
 
-            for (let el of elements) {
-                el.classList.add("hidden")
-            }
-            this.$refs['results-block']?.classList.remove("hidden")
-            document.body.classList.remove('stop-scrolling')
 
         } else {
             this.$store.state.results = []

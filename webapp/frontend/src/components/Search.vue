@@ -71,7 +71,11 @@ export default {
         this.categories = await this.getCategories()
         let uri = window.location.search.substring(1);
         this.params = new URLSearchParams(uri)
-        this.$store.state.filters = { category_name: this.params.get('category'), sort_type: this.params.get('sort') ?? "default" }
+        const forward = this.$router.options.history.state.forward?.substring(1, 2)
+        if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length) {
+        } else {
+            this.$store.state.filters = { category_name: this.params.get('category'), sort_type: this.params.get('sort') ?? "default" }
+        }
     },
     methods: {
         search(e) {

@@ -107,7 +107,7 @@ export default {
         window.Telegram?.WebApp.MainButton.hide();
         window.Telegram?.WebApp.BackButton.offClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.hide();
-        this.$store.state.scrollTopResults = document.body.scrollTop
+        this.$store.state.scrollTopResults = window.scrollY
         console.log(this.$store.state.scrollTopResults)
 
     },
@@ -157,7 +157,7 @@ export default {
             }, delay)
         },
         scroll() {
-            window.onscroll = async () => {
+            window.onscroll = async (e) => {
                 let bottomwindow = window.scrollY + window.innerHeight + 2000 > document.documentElement.scrollHeight;
 
                 if (bottomwindow && !this.loadingUpdate && !this.isEnded) {

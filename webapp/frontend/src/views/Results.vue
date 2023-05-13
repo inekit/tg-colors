@@ -278,9 +278,6 @@ export default {
             width: 100%;
             height: calc(32vw - 1rem);
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
 
@@ -321,9 +318,9 @@ export default {
             }
 
             img {
-                min-width: 100%;
-                min-height: 100%;
-                flex-shrink: 0;
+                object-fit: cover;
+                width: 100%;
+                height: 100%;
             }
         }
 

@@ -59,7 +59,7 @@ export default {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
         const elements = document.getElementsByClassName('preloader')
 
-        console.log(234234, (forward === 'i' || forward === 'b'), this.$store.state.results?.length > 0)
+        console.log(this.$store.state.scrollTopResults)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length > 0) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;
             console.log(this.$store.state.results, elements)
@@ -108,6 +108,8 @@ export default {
         window.Telegram?.WebApp.BackButton.offClick(this.routeBack);
         window.Telegram?.WebApp.BackButton.hide();
         this.$store.state.scrollTopResults = document.body.scrollTop
+        console.log(this.$store.state.scrollTopResults)
+
     },
     methods: {
         routeToBasket() {

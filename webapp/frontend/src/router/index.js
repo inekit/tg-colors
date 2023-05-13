@@ -51,7 +51,7 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     // console.log(to, from, savedPosition)
     // always scroll to top
-    if (to.name !== 'Results' && to.name !== 'Categories') return { top: 0 }
+    if (to.name !== 'Results') return { top: 0 }
   },
 })
 

@@ -44,7 +44,7 @@ export default {
     },
     watch: {
         "$store.state.searchQuery": async function () {
-            await this.updatePage(300)
+            //await this.updatePage(300)
 
         },
         "$store.state.filters": async function () {
@@ -148,8 +148,8 @@ export default {
         },
         async updatePage(delay) {
             console.log(123)
-            //this.loadingUpdate = true;
-            //this.$store.state.results = await this.sendSearchRequest(true);
+            this.loadingUpdate = true;
+            this.$store.state.results = await this.sendSearchRequest(true);
 
             this.$refs['results-block']?.classList.add("hidden")
             document.body.classList.add('stop-scrolling')

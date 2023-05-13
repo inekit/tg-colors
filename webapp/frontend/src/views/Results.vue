@@ -56,7 +56,7 @@ export default {
             //await this.toggleButtons()
         }
     },
-    async beforeMount() {
+    async mounted() {
         const forward = this.$router.options.history.state.forward?.substring(1, 2)
         if ((forward === 'i' || forward === 'b') && this.$store.state.results?.length) {
             document.body.scrollTop = this.$store.state.scrollTopResults ?? 0;

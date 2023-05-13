@@ -277,7 +277,7 @@ export default {
             background-color: #414141;
             width: 100%;
             height: calc(32vw - 1rem);
-            aspect-ratio: 1;
+            flex: 1;
 
             position: relative;
             overflow: hidden;
@@ -321,9 +321,13 @@ export default {
             }
 
             img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+                position: absolute;
+                left: 0;
+                top: 0;
             }
         }
 

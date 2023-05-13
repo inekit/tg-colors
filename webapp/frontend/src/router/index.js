@@ -49,9 +49,9 @@ const router = createRouter({
   history: createWebHistory('/colorsfront/'),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    console.log(to, from, savedPosition)
+    // console.log(to, from, savedPosition)
     // always scroll to top
-    return { top: 0 }
+    if (to.name !== 'Results' && to.name !== 'Categories') return { top: 0 }
   },
 })
 

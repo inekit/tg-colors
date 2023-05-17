@@ -60,16 +60,19 @@ class UsersService {
 
       connection
         .query(
-          `SELECT o.*,oi.count, io.size, io.material, io.price, i.title from orders o 
+          `SELECT o.*,
+          json_agg(DISTINCT jsonb_build_object('title', i.title,'count',oi.count, 
+           'material',  io.material, 'size', io.size, 'price', io.price)) items 
+          from orders o 
           left join order_items oi on o.id = oi.order_id  
           left join item_options io on oi.item_option_id = io.id  
           left join items i on io.item_id = i.id 
           where (user_id = $3 or $3 is NULL)  
           ${isBasket ? "" : `and status <> 'basket'`}
-          GROUP BY o.id, oi.count, io.size, io.material, io.price, i.title
-          ORDER BY id DESC
+          GROUP BY o.id
+          ORDER BY status, o.id DESC
           LIMIT $1 OFFSET $2`,
-          [take, skip, user_id]
+          [(take, skip, user_id)]
         )
         .then(async (data) => {
           return res(data);

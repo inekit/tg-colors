@@ -10,7 +10,7 @@ class Robokassa {
     //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
     const signature = crypto
       .createHash("md5")
-      .update(`${this.MerchantLogin}:${OutSum}:${InvId}:${this.Password}`)
+      .update(`${this.MerchantLogin}:${OutSum}:${InvId}:${1}:${this.Password}`)
       .digest("hex");
 
     return new Promise((resolve, reject) => {
@@ -21,7 +21,7 @@ class Robokassa {
             OutSum,
             InvId,
             Description,
-            Reciept: encodeURI(JSON.stringify(Reciept)),
+            Reciept: 1,
             SignatureValue: signature,
             Culture: "ru",
           },

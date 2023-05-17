@@ -34,11 +34,13 @@ class Robokassa {
     const signature = crypto
       .createHash("md5")
       .update(
-        `${this.MerchantLogin}:${OutSum}:${InvId}:${JSON.stringify(Reciept)}:${
-          this.Password
-        }`
+        `${this.MerchantLogin}:${OutSum}:${InvId}:${encodeURI(
+          JSON.stringify(Reciept)
+        )}:${this.Password}`
       )
       .digest("hex");
+
+    console.log(signature);
 
     return new Promise((resolve, reject) => {
       axios

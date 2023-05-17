@@ -52,6 +52,8 @@ mainStage.action("admin", async (ctx) => {
   ctx.scene.enter("adminScene");
 });
 
+mainStage.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
+
 const stages = new Composer();
 
 stages.use(Telegraf.chatType("private", mainStage.middleware()));

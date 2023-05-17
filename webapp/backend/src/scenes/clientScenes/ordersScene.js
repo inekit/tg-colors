@@ -53,7 +53,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
   const order = (
     await connection.query(
       `select o.*, individual_text, individual_price, p.type promo_type, p.sum promo_sum,
-    json_agg(DISTINCT jsonb_build_object('title', i.title,'count',oi.count, 'id', io.id, 'size', io.size, 'material', io.material, 'price', io.price)) items 
+    json_agg(DISTINCT jsonb_build_object('title', i.title,'category',i.category_name, 'count',oi.count, 'id', io.id, 'size', io.size, 'material', io.material, 'price', io.price)) items 
     from orders o 
     left join order_items oi on o.id = oi.order_id  
     left join item_options io on oi.item_option_id = io.id  

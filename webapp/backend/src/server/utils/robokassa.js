@@ -7,7 +7,7 @@ class Robokassa {
     this.Password = Password;
   }
   async getInvoiceLink({ OutSum, InvId, Description, Reciept }) {
-    console.log(encodeURI(JSON.stringify(Reciept)), Reciept);
+    //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
     const signature = crypto
       .createHash("md5")
       .update(
@@ -25,7 +25,7 @@ class Robokassa {
             OutSum,
             InvId,
             Description,
-            Reciept,
+            Reciept: encodeURI(JSON.stringify(Reciept)),
             SignatureValue: signature,
             Culture: "ru",
           },

@@ -42,6 +42,11 @@
                 v-model="basketData.promo_code">
             <button class="button-append" type="button" @click="getPromoSale">Применить</button>
         </div>
+        <h2>Пожелания к заказу</h2>
+        <div class="input-group">
+            <textarea id="comment" name="comment" placeholder="Напишите что-нибудь" v-model="basketData.comment"
+                length="255" />
+        </div>
         <h2 class="total">Итого</h2>
         <div class="pricing" hidden>Стоимость доставки<span>{{ deliveryPrice ? `${deliveryPrice} ₽` : "Не определена"
         }}</span>
@@ -119,6 +124,7 @@ export default {
                     promo_code: this.sale.code,
                     delivery_price: 0,
                     delivery_time: this.deliveryTime,
+                    comment: this.basketData.comment,
                     total: this.totalSum
                 })
                 .then(async (response) => {
@@ -325,7 +331,8 @@ export default {
 
     position: relative;
 
-    input {
+    input,
+    textarea {
         background-color: #E6E6E6;
         padding: 17px 20px;
         width: calc(100% - 40px);

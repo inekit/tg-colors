@@ -116,7 +116,7 @@ class UsersService {
           await queryRunner.query(
             `select o.*, count(oi.item_option_id) count_items,
           individual_price,individual_text,
-          json_agg(json_build_object('title', i.title,'count',oi.count, 'id', io.id, 'size', io.size, 'material', io.material, 'price', io.price)) items 
+          json_agg(json_build_object('title', i.title,'category', i.category,'count',oi.count, 'id', io.id, 'size', io.size, 'material', io.material, 'price', io.price)) items 
           from orders o 
           left join order_items oi on o.id = oi.order_id  
           left join item_options io on oi.item_option_id = io.id  
@@ -238,17 +238,34 @@ class UsersService {
           Password: process.env.ROBO_PASSWORD,
         });
 
+        function makeSale(price, saleType, saleSum) {
+          return saleType === "money"
+            ? Math.max(price - saleSum, 0)
+            : ((+(100 - saleSum) * price) / 100).toFixed(0);
+        }
+        const reciept = {
+          items: basket.items?.map((el) => {
+            const s = "abcэюя123!@#";
+            const p = /[^a-zA-Zа-яА-Я0-9]+/g;
+
+            alert(s.replace(p, ""));
+
+            return {
+              name: `${el.category} ${el.title}`,
+              cost: el.price,
+              sum: makeSale(el.price * el.count, type, sum),
+              quantity: el.count,
+              payment_method: "full_payment",
+              tax: "none",
+            };
+          }),
+        };
+
         const link = await robokassa
           .getInvoiceLink({
             OutSum: total,
             InvId: order_id,
-            Description: (
-              basket.items
-                ?.map((el) => `${el.title} - ${el.count} (шт.)`)
-                ?.join("; ") +
-                "; " +
-                basket.individual_text ?? ""
-            ).substr(0, 100),
+            Reciept: reciept,
           })
           .catch(console.log);
 

@@ -92,17 +92,30 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
       Password: process.env.ROBO_PASSWORD,
     });
 
+    function makeSale(price, saleType, saleSum) {
+      return saleType === "money"
+        ? Math.max(price - saleSum, 0)
+        : ((+(100 - saleSum) * price) / 100).toFixed(0);
+    }
+    const reciept = {
+      items: order.items?.map((el) => {
+        const p = /[^a-zA-Zа-яА-Я0-9]+/g;
+        return {
+          name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,
+          cost: el.price,
+          sum: makeSale(el.price * el.count, type, sum),
+          quantity: el.count,
+          payment_method: "full_payment",
+          tax: "none",
+        };
+      }),
+    };
+
     const link = await robokassa
       .getInvoiceLink({
         OutSum: order.total,
         InvId: order_id,
-        Description: (
-          order.items
-            ?.map((el) => `${el.title} - ${el.count} (шт.)`)
-            ?.join("; ") +
-            "; " +
-            order.individual_text ?? ""
-        ).substr(0, 100),
+        Reciept: reciept,
       })
       .catch(console.log);
 

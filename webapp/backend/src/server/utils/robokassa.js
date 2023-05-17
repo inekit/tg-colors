@@ -40,7 +40,11 @@ class Robokassa {
       )
       .digest("hex");
 
-    console.log(signature);
+    console.log(
+      `${this.MerchantLogin}:${OutSum}:${InvId}:${encodeURI(
+        JSON.stringify(Reciept)
+      )}:${this.Password}`
+    );
 
     return new Promise((resolve, reject) => {
       axios

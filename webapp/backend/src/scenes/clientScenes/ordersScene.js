@@ -60,7 +60,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
     left join items i on io.item_id = i.id 
     left join promos p on o.promo_code=p.code
     where o.id = $1
-    group by o.id
+    group by o.id, p.code
     order by o.status, o.id
     limit 1`,
       [order_id]

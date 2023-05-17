@@ -22,7 +22,7 @@ class UsersService {
 
       connection
         .query(
-          `SELECT o.*,count(oi.item_option_id) count_items,
+          `SELECT o.*,count(oi.item_option_id) count_items, u.username,p.type promo_type, p.sum promo_sum,
           json_agg(json_build_object(
             'title', i.title,'count',oi.count, 'id', io.id, 'item_id', i.id, 'size', io.size, 'material', io.material, 'price', io.price,'mainside_id', oi.mainside_id
             )) items
@@ -30,8 +30,10 @@ class UsersService {
           left join order_items oi on o.id = oi.order_id  
           left join item_options io on oi.item_option_id = io.id  
           left join items i on io.item_id = i.id  
+          left join users u on o.user_id = u.id
+          left join promos p on p.code = o.promo_code
           where o.id = $1
-          group by o.id
+          group by o.id, u.username, p.code
           limit 1`,
           [id]
         )
@@ -192,6 +194,7 @@ class UsersService {
           name,
           surname,
           postal_code,
+          promo_code,
           patronymic,
           individual_price: basket.individual_price,
           individual_text: basket.individual_text,

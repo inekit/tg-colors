@@ -14,10 +14,17 @@
                 Адрес доставки: {{ order.address }}
             </div>
             <div>
+                Почтовый индекс: {{ order.postal_code }}
+            </div>
+            <div>
                 ФИО получателя: {{ `${order.surname} ${order.name} ${order.patronymic}` }}
             </div>
             <div>
                 Метод оплаты: {{ order.selected_po }}
+            </div>
+            <div>
+                Промокод: {{ order.promo_code ? `${order.promo_code} на ${order.promo_sum}${order.promo_type === 'money' ?
+                    'руб.' : '%'}` : 'Нет' }}
             </div>
             <div>
                 Сумма заказа: {{ order.total }}

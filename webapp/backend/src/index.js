@@ -20,10 +20,10 @@ global.titles = titles;
 console.log("started");
 
 (async () => {
+  bot.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
+
   bot.use(telegraf.session(), require("./stages"));
   bot.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
-
-  bot.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
 
   server(ctx);
 

@@ -9,7 +9,7 @@ class Robokassa {
   async getInvoiceLink({ OutSum, InvId, Description }) {
     //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
 
-    Reciept = {
+    const Reciept = {
       sno: "osn",
       items: [
         {

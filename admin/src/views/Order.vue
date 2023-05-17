@@ -14,13 +14,13 @@
                 Адрес доставки: {{ order.address }}
             </div>
             <div>
-                Почтовый индекс: {{ order.postal_code }}
+                Почтовый индекс: {{ order.postal_code ?? "Нет" }}
             </div>
             <div>
                 ФИО получателя: {{ `${order.surname} ${order.name} ${order.patronymic}` }}
             </div>
             <div>
-                Пожелания к заказу: {{ order.comment }}
+                Пожелания к заказу: {{ order.comment ?? "Нет" }}
             </div>
             <div>
                 Метод оплаты: {{ order.selected_po }}

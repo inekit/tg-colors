@@ -23,6 +23,8 @@ console.log("started");
   bot.use(telegraf.session(), require("./stages"));
   bot.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
 
+  bot.on("text", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
+
   server(ctx);
 
   if (process.env.NODE_ENV === "production") {

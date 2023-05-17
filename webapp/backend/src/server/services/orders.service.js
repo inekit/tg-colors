@@ -97,6 +97,7 @@ class UsersService {
       postal_code,
       promo_code,
       delivery_price,
+      comment,
     },
     ctx
   ) {
@@ -199,6 +200,7 @@ class UsersService {
           postal_code,
           promo_code,
           patronymic,
+          comment,
           individual_price: basket.individual_price,
           individual_text: basket.individual_text,
         });

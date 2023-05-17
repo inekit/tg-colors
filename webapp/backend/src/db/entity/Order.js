@@ -65,6 +65,11 @@ module.exports = new EntitySchema({
       length: 45,
       nullable: true,
     },
+    comment: {
+      type: "varchar",
+      length: 2000,
+      nullable: true,
+    },
     individual_text: {
       type: "text",
       nullable: true,

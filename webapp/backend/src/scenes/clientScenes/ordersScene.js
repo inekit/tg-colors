@@ -102,7 +102,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
       items: order.items?.map((el) => {
         const p = /[^a-zA-Zа-яА-Я0-9]+/g;
         return {
-          name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,
+          name: `${el.category} ${el.title}`,
           cost: el.price,
           sum: makeSale(el.price * el.count, order.promo_type, order.promo_sum),
           quantity: el.count,

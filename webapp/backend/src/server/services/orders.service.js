@@ -72,7 +72,7 @@ class UsersService {
           GROUP BY o.id
           ORDER BY status, o.id DESC
           LIMIT $1 OFFSET $2`,
-          [(take, skip, user_id)]
+          [take, skip, user_id]
         )
         .then(async (data) => {
           return res(data);

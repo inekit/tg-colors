@@ -20,6 +20,9 @@
                 ФИО получателя: {{ `${order.surname} ${order.name} ${order.patronymic}` }}
             </div>
             <div>
+                Пожелания к заказу: {{ order.comment }}
+            </div>
+            <div>
                 Метод оплаты: {{ order.selected_po }}
             </div>
             <div>
@@ -83,6 +86,10 @@ export default {
                 {
                     name: 'id',
                     title: 'Артикул',
+                },
+                {
+                    name: 'category',
+                    title: 'Категория',
                 },
                 {
                     name: 'title',

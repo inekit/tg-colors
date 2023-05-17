@@ -52,12 +52,13 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
 
   const order = (
     await connection.query(
-      `select o.*, individual_text, individual_price,
+      `select o.*, individual_text, individual_price, p.type promo_type, p.sum promo_sum,
     json_agg(DISTINCT jsonb_build_object('title', i.title,'count',oi.count, 'id', io.id, 'size', io.size, 'material', io.material, 'price', io.price)) items 
     from orders o 
     left join order_items oi on o.id = oi.order_id  
     left join item_options io on oi.item_option_id = io.id  
     left join items i on io.item_id = i.id 
+    left join promos p on o.promo_code=p.code
     where o.id = $1
     group by o.id
     order by o.status, o.id
@@ -103,7 +104,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
         return {
           name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,
           cost: el.price,
-          sum: makeSale(el.price * el.count, type, sum),
+          sum: makeSale(el.price * el.count, order.promo_type, order.promo_sum),
           quantity: el.count,
           payment_method: "full_payment",
           tax: "none",

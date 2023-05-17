@@ -53,6 +53,7 @@ mainStage.action("admin", async (ctx) => {
 });
 
 mainStage.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
+mainStage.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
 
 const stages = new Composer();
 

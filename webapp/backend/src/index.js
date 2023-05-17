@@ -21,7 +21,6 @@ console.log("started");
 
 (async () => {
   bot.use(telegraf.session(), require("./stages"));
-  bot.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
 
   server(ctx);
 

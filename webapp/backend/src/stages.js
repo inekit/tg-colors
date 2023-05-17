@@ -52,12 +52,12 @@ mainStage.action("admin", async (ctx) => {
   ctx.scene.enter("adminScene");
 });
 
-mainStage.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
-mainStage.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
-
 const stages = new Composer();
 
 stages.use(Telegraf.chatType("private", mainStage.middleware()));
 stages.use(Telegraf.chatType("private", adminStage.middleware()));
+
+stages.on("message", (ctx) => ctx.replyWithTitle("CANT_WRITE"));
+stages.action(/^.+$/g, (ctx) => ctx.answerCbQuery().catch((e) => {}));
 
 module.exports = stages;

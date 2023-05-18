@@ -30,7 +30,7 @@ class Robokassa {
 
     return new Promise((resolve, reject) => {
       axios
-        .post(`https://auth.robokassa.ru/Merchant/Index.aspx?`, null, {
+        .post(`https://auth.robokassa.ru/Merchant/Index.aspx`, null, {
           params: {
             MerchantLogin: this.MerchantLogin,
             OutSum,

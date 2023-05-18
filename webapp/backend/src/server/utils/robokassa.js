@@ -10,27 +10,9 @@ class Robokassa {
     //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
 
     const Reciept = {
-      sno: "osn",
-      items: [
-        {
-          name: "Название товара 1",
-          quantity: 1,
-          sum: 100,
-          payment_method: "full_payment",
-          payment_object: "commodity",
-          tax: "vat10",
-        },
-        {
-          name: "Название товара 2",
-          quantity: 3,
-          sum: 450,
-          cost: 150,
-          payment_method: "full_prepayment",
-          payment_object: "service",
-          nomenclature_code: "04620034587217",
-        },
-      ],
+      items: [{ name: "название", quantity: 1, sum: 1, tax: "none" }],
     };
+
     const signature = crypto
       .createHash("md5")
       .update(

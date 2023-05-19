@@ -226,12 +226,8 @@ export default {
   display: block !important;
 }
 
-@media (min-width: 1600px) {
-  .modal-xl {
-    --cui-modal-width: 1540px !important;
-    width: 1540px !important;
-    background-color: white !important;
-  }
+.modal-xl {
+  width: 95vw !important;
 }
 
 
@@ -247,6 +243,15 @@ export default {
   padding: 5px;
   background: #efefef;
   border: 1px solid #dddddd;
+}
+
+tbody {
+  //height: 100vh;
+  width: 100%;
+  overflow-y: hidden;
+  /* Trigger vertical scroll    */
+  overflow-x: auto;
+  /* Hide the horizontal scroll */
 }
 
 .table td {

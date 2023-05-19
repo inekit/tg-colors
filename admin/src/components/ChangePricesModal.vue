@@ -226,7 +226,7 @@ export default {
   display: block !important;
 }
 
-.giant-modal {
+.modal {
   width: 95vw !important;
   --cui-modal-width: 95vw !important;
 }

@@ -217,6 +217,12 @@ export default {
 }
 </script>
 
+<style lang="scss">
+.giant-modal {
+  width: 95vw !important;
+  --cui-modal-width: 95vw !important;
+}
+</style>
 <style lang="scss" scoped>
 ::v-deep .hidden {
   display: none;
@@ -226,10 +232,7 @@ export default {
   display: block !important;
 }
 
-.modal {
-  width: 95vw !important;
-  --cui-modal-width: 95vw !important;
-}
+
 
 
 .table {

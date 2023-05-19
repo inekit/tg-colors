@@ -104,7 +104,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
         return {
           name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,
           cost: el.price,
-          sum: makeSale(el.price * el.count, type, sum),
+          sum: makeSale(el.price * el.count, order.promo_type, order.promo_sum),
           quantity: el.count,
           payment_method: "full_payment",
           tax: "none",

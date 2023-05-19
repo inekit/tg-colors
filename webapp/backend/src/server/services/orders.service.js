@@ -249,7 +249,7 @@ class UsersService {
         }
         const receipt = {
           items: basket.items?.map((el) => {
-            const p = /[^a-zA-Zа-яА-Я0-9]+/g;
+            const p = /[^a-zA-Zа-яА-Я0-9\s]+/g;
             return {
               name: `${el.category?.replace(p, "")} ${el.title?.replace(
                 p,

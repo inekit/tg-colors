@@ -226,7 +226,7 @@ export default {
   display: block !important;
 }
 
-::v-deep .giant-modal {
+.giant-modal {
   width: 95vw !important;
   --cui-modal-width: 95vw !important;
 }

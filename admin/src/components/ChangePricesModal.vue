@@ -1,6 +1,6 @@
 <template>
   <CButton class="mx-3" color="primary" @click="changePrices">Сменить цены</CButton>
-  <CModal size="xxl" backdrop="static" alignment="center" :visible="visible" @close="closeModal">
+  <CModal size="xl" backdrop="static" alignment="center" :visible="visible" @close="closeModal">
     <CForm novalidate :validated="formValid" ref="add-file-form" @change="wregert" @submit.prevent="editPrices()"
       class="add-user" style="display: 'none'">
       <CModalHeader>

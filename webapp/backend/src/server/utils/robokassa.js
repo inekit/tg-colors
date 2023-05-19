@@ -6,12 +6,8 @@ class Robokassa {
     this.MerchantLogin = MerchantLogin;
     this.Password = Password;
   }
-  async getInvoiceLink({ OutSum, InvId, Description }) {
+  async getInvoiceLink({ OutSum, InvId, Description, Reciept }) {
     //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
-
-    const Reciept = {
-      items: [{ name: "название", quantity: 1, sum: 1, tax: "none" }],
-    };
 
     const signature = crypto
       .createHash("md5")

@@ -33,7 +33,7 @@ class Robokassa {
         .post(`https://auth.robokassa.ru/Merchant/Indexjson.aspx`, null, {
           params: {
             MerchantLogin: this.MerchantLogin,
-            OutSum,
+            OutSum: 1,
             invoiceID: null,
             Reciept: encodeURI(JSON.stringify(Reciept)),
             //Description,

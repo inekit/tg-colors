@@ -98,13 +98,13 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
         ? Math.max(price - saleSum, 0)
         : ((+(100 - saleSum) * price) / 100).toFixed(0);
     }
-    const reciept = {
-      items: order.items?.map((el) => {
+    const receipt = {
+      items: basket.items?.map((el) => {
         const p = /[^a-zA-Zа-яА-Я0-9]+/g;
         return {
-          name: `${el.category} ${el.title}`,
+          name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,
           cost: el.price,
-          sum: makeSale(el.price * el.count, order.promo_type, order.promo_sum),
+          sum: makeSale(el.price * el.count, type, sum),
           quantity: el.count,
           payment_method: "full_payment",
           tax: "none",
@@ -116,7 +116,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
       .getInvoiceLink({
         OutSum: order.total,
         InvId: order_id,
-        Reciept: reciept,
+        Receipt: receipt,
       })
       .catch(console.log);
 

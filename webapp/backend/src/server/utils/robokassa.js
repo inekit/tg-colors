@@ -6,23 +6,17 @@ class Robokassa {
     this.MerchantLogin = MerchantLogin;
     this.Password = Password;
   }
-  async getInvoiceLink({ OutSum, InvId, Description, Reciept }) {
+  async getInvoiceLink({ OutSum, InvId, Description, Receipt }) {
     //console.log(encodeURI(JSON.stringify(Reciept)),encodeURI() Reciept);
 
     const signature = crypto
       .createHash("md5")
       .update(
         `${this.MerchantLogin}:${OutSum}:${InvId}:${encodeURI(
-          JSON.stringify(Reciept)
+          JSON.stringify(Receipt)
         )}:${this.Password}`
       )
       .digest("hex");
-
-    console.log(
-      `${this.MerchantLogin}:${OutSum}:${InvId}:${encodeURI(
-        JSON.stringify(Reciept)
-      )}:${this.Password}`
-    );
 
     return new Promise((resolve, reject) => {
       axios
@@ -31,7 +25,7 @@ class Robokassa {
             MerchantLogin: this.MerchantLogin,
             OutSum: OutSum,
             invoiceID: InvId,
-            Receipt: encodeURI(JSON.stringify(Reciept)),
+            Receipt: encodeURI(JSON.stringify(Receipt)),
             //Description,
             SignatureValue: signature,
             Culture: "ru",

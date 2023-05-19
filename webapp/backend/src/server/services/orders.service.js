@@ -247,7 +247,7 @@ class UsersService {
             ? Math.max(price - saleSum, 0)
             : ((+(100 - saleSum) * price) / 100).toFixed(0);
         }
-        const reciept = {
+        const receipt = {
           items: basket.items?.map((el) => {
             const p = /[^a-zA-Zа-яА-Я0-9]+/g;
             return {
@@ -268,7 +268,7 @@ class UsersService {
           .getInvoiceLink({
             OutSum: total,
             InvId: order_id,
-            Reciept: reciept,
+            Receipt: receipt,
           })
           .catch(console.log);
 

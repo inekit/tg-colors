@@ -99,7 +99,7 @@ scene.action(/^order\-([0-9]+)$/g, async (ctx) => {
         : ((+(100 - saleSum) * price) / 100).toFixed(0);
     }
     const receipt = {
-      items: basket.items?.map((el) => {
+      items: order.items?.map((el) => {
         const p = /[^a-zA-Zа-яА-Я0-9]+/g;
         return {
           name: `${el.category?.replace(p, "")} ${el.title?.replace(p, "")}`,

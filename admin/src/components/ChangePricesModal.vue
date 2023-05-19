@@ -226,7 +226,7 @@ export default {
   display: block !important;
 }
 
-.giant-modal {
+.giant-modal>div {
   width: 95vw !important;
 }
 
@@ -245,13 +245,10 @@ export default {
   border: 1px solid #dddddd;
 }
 
-tbody {
-  //height: 100vh;
+
+.options-shedle {
   width: 100%;
-  overflow-y: hidden;
-  /* Trigger vertical scroll    */
   overflow-x: auto;
-  /* Hide the horizontal scroll */
 }
 
 .table td {

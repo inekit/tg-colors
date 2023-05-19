@@ -227,7 +227,7 @@ export default {
 }
 
 @media (min-width: 1600px) {
-  .modal-xl {
+  .modal-dialog {
     --cui-modal-width: 1540px !important;
   }
 }

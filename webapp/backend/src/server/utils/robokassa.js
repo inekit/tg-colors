@@ -34,11 +34,11 @@ class Robokassa {
           params: {
             MerchantLogin: this.MerchantLogin,
             OutSum,
-            InvId,
+            invoiceID: InvId,
             Reciept: encodeURI(JSON.stringify(Reciept)),
-            Description,
+            //Description,
             SignatureValue: signature,
-            Culture: "ru",
+            //Culture: "ru",
           },
         })
         .then((response) => {

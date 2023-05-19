@@ -34,7 +34,7 @@ class Robokassa {
             Receipt: encodeURI(JSON.stringify(Reciept)),
             //Description,
             SignatureValue: signature,
-            //Culture: "ru",
+            Culture: "ru",
           },
         })
         .then((response) => {

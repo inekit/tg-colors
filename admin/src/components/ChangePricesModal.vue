@@ -218,7 +218,7 @@ export default {
 </script>
 
 <style lang="scss">
-.giant-modal {
+.giant-modal>div {
   width: 95vw !important;
   --cui-modal-width: 95vw !important;
 }

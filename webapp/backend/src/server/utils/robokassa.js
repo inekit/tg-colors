@@ -23,9 +23,9 @@ class Robokassa {
       .digest("hex");
 
     console.log(
-      `${this.MerchantLogin}:${OutSum}:${InvId}:${encodeURI(
-        JSON.stringify(Reciept)
-      )}:${this.Password}`
+      `${this.MerchantLogin}:${1}::${encodeURI(JSON.stringify(Reciept))}:${
+        this.Password
+      }`
     );
 
     return new Promise((resolve, reject) => {
@@ -34,7 +34,7 @@ class Robokassa {
           params: {
             MerchantLogin: this.MerchantLogin,
             OutSum,
-            invoiceID: InvId,
+            invoiceID: null,
             Reciept: encodeURI(JSON.stringify(Reciept)),
             //Description,
             SignatureValue: signature,

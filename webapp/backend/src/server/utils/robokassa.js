@@ -35,7 +35,7 @@ class Robokassa {
             MerchantLogin: this.MerchantLogin,
             OutSum: 1,
             invoiceID: null,
-            Reciept: encodeURI(JSON.stringify(Reciept)),
+            Receipt: encodeURI(JSON.stringify(Reciept)),
             //Description,
             SignatureValue: signature,
             //Culture: "ru",

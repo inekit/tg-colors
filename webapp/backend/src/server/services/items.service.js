@@ -299,8 +299,8 @@ class UsersService {
     description,
     images,
     previewsBinary,
-    optionsObject,
-    optionsObjectBackside,
+    optionsArray,
+    optionsArrayBackside,
     type,
     order_id,
   }) {
@@ -391,37 +391,71 @@ class UsersService {
             .returning("*")
             .execute();
 
+          const oa_parsed = JSON.parse(optionsArray);
+
+          let idArray = [];
+
+          for (let optionIndex in oa_parsed) {
+            const {
+              material,
+              size,
+              price,
+              id: editId,
+            } = oa_parsed[optionIndex];
+
+            if (editId) {
+              idArray.push(editId);
+              await queryRunner.query(
+                "update item_options set item_id = $1, size=$2,material=$3,price=$4 where id = $5",
+                [id, size, material, price, editId]
+              );
+            } else {
+              const newId = (
+                await queryRunner.query(
+                  "insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id",
+                  [id, size, material, price]
+                )
+              )?.[0]?.id;
+
+              console.log(newId);
+
+              idArray.push(newId);
+            }
+          }
+
+          const oa_parsed_backside = JSON.parse(optionsArrayBackside);
+
+          for (let optionIndex in oa_parsed_backside) {
+            const {
+              material,
+              size,
+              price,
+              id: editId,
+            } = oa_parsed_backside[optionIndex];
+
+            if (editId) {
+              idArray.push(editId);
+              await queryRunner.query(
+                "update item_options set item_id = $1, size=$2,material=$3,price=$4 where id = $5",
+                [id, size, material, price, editId]
+              );
+            } else {
+              const newId = (
+                await queryRunner.query(
+                  "insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, true) returning id",
+                  [id, size, material, price]
+                )
+              )?.[0]?.id;
+              idArray.push(newId);
+            }
+          }
+
           await queryRunner.query(
-            "delete from item_options where item_id = $1",
-            [id]
+            "delete from item_options where item_id = $1 and not (id = any($2))",
+            [id, idArray]
           );
 
-          const oo = optionsObject && JSON.parse(optionsObject);
-          for (let m in oo) {
-            const sizes = oo[m];
-            for (let s in sizes) {
-              const price = sizes[s];
-              console.log(s, m, price);
-              if (price)
-                await queryRunner.query(
-                  "insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false)",
-                  [id, s, m, price]
-                );
-            }
-          }
-          const oob =
-            optionsObjectBackside && JSON.parse(optionsObjectBackside);
-          for (let m in oob) {
-            const sizes = oob[m];
-            for (let s in sizes) {
-              const price = sizes[s];
-              if (price)
-                await queryRunner.query(
-                  "insert into item_options (item_id,size,material,price, is_backside) values ($1,$2,$3,$4,true)",
-                  [id, s, m, price]
-                );
-            }
-          }
+          console.log(idArray);
         }
 
         await queryRunner.commitTransaction();

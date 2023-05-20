@@ -334,31 +334,8 @@ class UsersService {
             idArray.push(newId);
           }
 
-          for (let optionIndex in oa_parsed_backside) {
-            const { material, size, price } = oa_parsed_backside[optionIndex];
-
-            let newId = (
-              await queryRunner.query(
-                `update item_options set price=$4 
-              where size=$2 and material=$3 and is_backside = true and item_id = $1 returning id`,
-                [item.id, size, material, price]
-              )
-            )?.[0]?.[0]?.id;
-
-            if (!newId) {
-              newId = (
-                await queryRunner.query(
-                  `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, true) returning id`,
-                  [item.id, size, material, price]
-                )
-              )?.[0]?.id;
-            }
-
-            idArray.push(newId);
-          }
-
           await queryRunner.query(
-            "delete from item_options where item_id = $1 and not (id = any($2))",
+            "delete from item_options where item_id = $1 and is_backside=false and not (id = any($2))",
             [item.id, idArray]
           );
         }

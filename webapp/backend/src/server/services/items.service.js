@@ -317,14 +317,6 @@ class UsersService {
 
           for (let optionIndex in oa_parsed) {
             const { material, size, price } = oa_parsed[optionIndex];
-
-            let newId = (
-              await queryRunner.query(
-                `update item_options set price=$4 
-              where size=$2 and material=$3 and is_backside = false and item_id = $1 returning id`,
-                [item.id, size, material, price]
-              )
-            )?.[0]?.[0]?.id;
           }
         }
 

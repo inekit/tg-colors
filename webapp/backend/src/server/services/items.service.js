@@ -390,6 +390,7 @@ class UsersService {
     optionsArrayBackside,
     type,
     order_id,
+    editAll,
   }) {
     return new Promise(async (res, rej) => {
       const images_array = Array.isArray(images) ? images : [images];
@@ -542,11 +543,12 @@ class UsersService {
             [id, idArray]
           );
 
-          this.editAllOptionsInCategory({
-            categoryName,
-            oa_parsed,
-            oa_parsed_backside,
-          });
+          if (editAll)
+            this.editAllOptionsInCategory({
+              categoryName,
+              oa_parsed,
+              oa_parsed_backside,
+            });
 
           console.log(idArray);
         }

@@ -560,7 +560,7 @@ class UsersService {
               return new Promise((resolve) => setTimeout(resolve, delayInms));
             };
 
-            await delay(200);
+            await delay(500);
           }
 
           console.log(idArray);

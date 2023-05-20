@@ -354,7 +354,7 @@ export default {
       formData.append('optionsObjectBackside', JSON.stringify(this.options_object_backside))
       formData.append('optionsArrayBackside', JSON.stringify(options_array_backside))
 
-      formData.append('editAll', this.editAll)
+      this.editAll && formData.append('editAll', this.editAll)
 
 
 

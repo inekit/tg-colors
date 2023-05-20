@@ -24,11 +24,10 @@
         <div class="options-shedle">
           <span>Опции</span>
           <div class="types-list">
-            <span>Изменить в категории</span>
             <CFormCheck id="changeall" :checked="editAll === true" @input="editAll = true" type="radio" name="changeall"
-              value="changeall" label="Да" />
+              value="changeall" label="Изменить все в категории" />
             <CFormCheck id="changeonly" :checked="editAll === false" @input="editAll = false" type="radio"
-              name="changeonly" value="changeonly" label="Нет" />
+              name="changeonly" value="changeonly" label="Изменить только для данного товара" />
           </div>
           <table class="table">
             <thead>

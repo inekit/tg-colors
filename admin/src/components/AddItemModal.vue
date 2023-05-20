@@ -315,8 +315,20 @@ export default {
       this.formData.category_name &&
         formData.append('categoryName', this.formData.category_name)
 
+      const options_array = [];
+
+      for (let materialName in this.options_object) {
+        for (let sizeName in this.options_object[materialName]) {
+          options_array.push({
+            material: materialName, size: sizeName, price: this.options_object[materialName][sizeName], id:
+              this.formData.options_array.find(el => el.material === materialName && el.size === sizeName)
+          })
+        }
+      }
 
       formData.append('optionsObject', JSON.stringify(this.options_object))
+      formData.append('optionsArray', JSON.stringify(this.options_array))
+
       formData.append('optionsObjectBackside', JSON.stringify(this.options_object_backside))
 
 

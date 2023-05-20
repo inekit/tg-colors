@@ -171,6 +171,7 @@ export default {
   updated() {
     console.log(1)
     this.options_object = {};
+    this.editAll = false;
     this.options_object_backside = {};
     this.formData.options_array = this.formData.options_array?.
       filter(({ material, price, size }) => !material && !size && !price ? false : true)

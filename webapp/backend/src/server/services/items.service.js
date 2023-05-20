@@ -325,7 +325,7 @@ class UsersService {
             console.log(newId);
 
             if (!newId) {
-              const newId = (
+              newId = (
                 await queryRunner.query(
                   `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id`,
                   [item.id, size, material, price]

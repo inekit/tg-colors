@@ -362,8 +362,6 @@ class UsersService {
       );
     }
 
-    await queryRunner.commitTransaction();
-
     console.log("выполнено");
   }
 

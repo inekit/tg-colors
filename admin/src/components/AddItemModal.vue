@@ -317,14 +317,11 @@ export default {
 
       const options_array = [];
 
-      console.log(this.formData.options_array)
-
       for (let materialName in this.options_object) {
         for (let sizeName in this.options_object[materialName]) {
-          console.log(materialName, sizeName, this.options_object[materialName][sizeName])
           options_array.push({
             material: materialName, size: sizeName, price: this.options_object[materialName][sizeName], id:
-              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)
+              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)?.id
           })
         }
       }
@@ -332,7 +329,19 @@ export default {
       formData.append('optionsObject', JSON.stringify(this.options_object))
       formData.append('optionsArray', JSON.stringify(options_array))
 
+      const options_array_backside = [];
+
+      for (let materialName in this.options_object_backside) {
+        for (let sizeName in this.options_object_backside[materialName]) {
+          options_array_backside.push({
+            material: materialName, size: sizeName, price: this.options_object_backside[materialName][sizeName], id:
+              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)?.id
+          })
+        }
+      }
+
       formData.append('optionsObjectBackside', JSON.stringify(this.options_object_backside))
+      formData.append('optionsArrayBackside', JSON.stringify(options_array_backside))
 
 
       isEdit && formData.append('id', this.formData.id)

@@ -544,7 +544,7 @@ class UsersService {
           );
 
           console.log(editAll, editAll !== false);
-          if (editAll)
+          if (editAll !== false)
             this.editAllOptionsInCategory({
               categoryName,
               oa_parsed,

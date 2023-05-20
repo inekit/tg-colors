@@ -308,8 +308,12 @@ class UsersService {
           [categoryName]
         );
 
+        console.log("started");
+
         for (let item of categoryItems) {
           let idArray = [];
+
+          console.log(item);
 
           for (let optionIndex in oa_parsed) {
             const { material, size, price } = oa_parsed[optionIndex];

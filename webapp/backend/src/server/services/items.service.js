@@ -292,6 +292,72 @@ class UsersService {
     });
   }
 
+  editAllOptionsInCategory({ categoryName, oa_parsed, oa_parsed_backside }) {
+    return new Promise(async (res, rej) => {
+      const connection = await tOrmCon;
+
+      const queryRunner = connection.createQueryRunner();
+
+      await queryRunner.connect();
+
+      await queryRunner.startTransaction();
+
+      try {
+        const categoryItems = await queryRunner.query(
+          `select * from items where category_name = $1`,
+          [categoryName]
+        );
+
+        for (let item of categoryItems) {
+          let idArray = [];
+
+          for (let optionIndex in oa_parsed) {
+            const { material, size, price } = oa_parsed[optionIndex];
+
+            const hasIO = await queryRunner.query(
+              `update item_options set price=$4 
+              where size=$2 and material=$3 and is_backside = false and item_id = $1 returning id`,
+              [item.id, size, material, price]
+            );
+
+            console.log(hasIO);
+
+            if (!hasIO) {
+              const newId = (
+                await queryRunner.query(
+                  `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id`,
+                  [item.id, size, material, price]
+                )
+              )?.[0]?.id;
+
+              idArray.push(newId);
+            }
+
+            console.log(newId);
+
+            idArray.push(newId);
+          }
+
+          await queryRunner.query(
+            "delete from item_options where item_id = $1 and is_backside=false and not (id = any($2))",
+            [item.id, idArray]
+          );
+        }
+
+        await queryRunner.commitTransaction();
+
+        res(data);
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+
+        console.log(error);
+        rej(new MySqlError(error));
+      } finally {
+        await queryRunner.release();
+      }
+    });
+  }
+
   editPost({
     id,
     title,
@@ -454,6 +520,12 @@ class UsersService {
             "delete from item_options where item_id = $1 and not (id = any($2))",
             [id, idArray]
           );
+
+          this.editAllOptionsInCategory({
+            categoryName,
+            oa_parsed,
+            oa_parsed_backside,
+          });
 
           console.log(idArray);
         }

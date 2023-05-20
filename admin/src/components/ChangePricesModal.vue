@@ -259,6 +259,7 @@ export default {
   border: 1px solid #dddddd;
   padding: 5px;
   position: relative;
+  min-width: 100px;
 
   .btn.btn-secondary {
     position: absolute;

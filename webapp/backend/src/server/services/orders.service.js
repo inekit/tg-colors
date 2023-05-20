@@ -251,7 +251,10 @@ class UsersService {
           items: basket.items?.map((el) => {
             const p = /[^a-zA-Zа-яА-Я0-9\s]+/g;
             return {
-              name: `${el.title?.replace(p, "")}`,
+              name: `${el.category?.replace(p, "")} ${el.title?.replace(
+                p,
+                ""
+              )}`,
               cost: el.price,
               sum: makeSale(el.price * el.count, type, sum),
               quantity: el.count,

@@ -550,17 +550,72 @@ class UsersService {
 
           console.log(editAll, !!editAll);
           if (editAll) {
-            this.editAllOptionsInCategory({
-              categoryName,
-              oa_parsed,
-              oa_parsed_backside,
-            });
+            const categoryItems = await queryRunner.query(
+              `select * from items where category_name = $1`,
+              [categoryName]
+            );
 
-            const delay = (delayInms) => {
-              return new Promise((resolve) => setTimeout(resolve, delayInms));
-            };
+            console.log("started");
 
-            await delay(500);
+            for (let item of categoryItems) {
+              let idArray = [];
+
+              console.log(item);
+
+              for (let optionIndex in oa_parsed) {
+                const { material, size, price } = oa_parsed[optionIndex];
+
+                let newId = (
+                  await queryRunner.query(
+                    `update item_options set price=$4 
+                  where size=$2 and material=$3 and is_backside = false and item_id = $1 returning id`,
+                    [item.id, size, material, price]
+                  )
+                )?.[0]?.[0]?.id;
+
+                console.log(newId);
+
+                if (!newId) {
+                  newId = (
+                    await queryRunner.query(
+                      `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id`,
+                      [item.id, size, material, price]
+                    )
+                  )?.[0]?.id;
+                }
+
+                idArray.push(newId);
+              }
+
+              for (let optionIndex in oa_parsed_backside) {
+                const { material, size, price } =
+                  oa_parsed_backside[optionIndex];
+
+                let newId = (
+                  await queryRunner.query(
+                    `update item_options set price=$4 
+                  where size=$2 and material=$3 and is_backside = true and item_id = $1 returning id`,
+                    [item.id, size, material, price]
+                  )
+                )?.[0]?.[0]?.id;
+
+                if (!newId) {
+                  newId = (
+                    await queryRunner.query(
+                      `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, true) returning id`,
+                      [item.id, size, material, price]
+                    )
+                  )?.[0]?.id;
+                }
+
+                idArray.push(newId);
+              }
+
+              await queryRunner.query(
+                "delete from item_options where item_id = $1 and not (id = any($2))",
+                [item.id, idArray]
+              );
+            }
           }
 
           console.log(idArray);

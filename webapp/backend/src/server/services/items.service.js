@@ -292,95 +292,96 @@ class UsersService {
     });
   }
 
-  async editAllOptionsInCategory({
-    categoryName,
-    oa_parsed,
-    oa_parsed_backside,
-  }) {
-    const connection = await tOrmCon;
+  editAllOptionsInCategory({ categoryName, oa_parsed, oa_parsed_backside }) {
+    return new Promise(async (res, rej) => {
+      const connection = await tOrmCon;
 
-    const queryRunner = connection.createQueryRunner();
+      const queryRunner = connection.createQueryRunner();
 
-    await queryRunner.connect();
+      await queryRunner.connect();
 
-    await queryRunner.startTransaction();
+      await queryRunner.startTransaction();
 
-    try {
-      const categoryItems = await queryRunner.query(
-        `select * from items where category_name = $1`,
-        [categoryName]
-      );
-
-      console.log("started");
-
-      for (let item of categoryItems) {
-        let idArray = [];
-
-        console.log(item);
-
-        for (let optionIndex in oa_parsed) {
-          const { material, size, price } = oa_parsed[optionIndex];
-
-          let newId = (
-            await queryRunner.query(
-              `update item_options set price=$4 
-              where size=$2 and material=$3 and is_backside = false and item_id = $1 returning id`,
-              [item.id, size, material, price]
-            )
-          )?.[0]?.[0]?.id;
-
-          console.log(newId);
-
-          if (!newId) {
-            newId = (
-              await queryRunner.query(
-                `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id`,
-                [item.id, size, material, price]
-              )
-            )?.[0]?.id;
-          }
-
-          idArray.push(newId);
-        }
-
-        for (let optionIndex in oa_parsed_backside) {
-          const { material, size, price } = oa_parsed_backside[optionIndex];
-
-          let newId = (
-            await queryRunner.query(
-              `update item_options set price=$4 
-              where size=$2 and material=$3 and is_backside = true and item_id = $1 returning id`,
-              [item.id, size, material, price]
-            )
-          )?.[0]?.[0]?.id;
-
-          if (!newId) {
-            newId = (
-              await queryRunner.query(
-                `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, true) returning id`,
-                [item.id, size, material, price]
-              )
-            )?.[0]?.id;
-          }
-
-          idArray.push(newId);
-        }
-
-        await queryRunner.query(
-          "delete from item_options where item_id = $1 and not (id = any($2))",
-          [item.id, idArray]
+      try {
+        const categoryItems = await queryRunner.query(
+          `select * from items where category_name = $1`,
+          [categoryName]
         );
+
+        console.log("started");
+
+        for (let item of categoryItems) {
+          let idArray = [];
+
+          console.log(item);
+
+          for (let optionIndex in oa_parsed) {
+            const { material, size, price } = oa_parsed[optionIndex];
+
+            let newId = (
+              await queryRunner.query(
+                `update item_options set price=$4 
+              where size=$2 and material=$3 and is_backside = false and item_id = $1 returning id`,
+                [item.id, size, material, price]
+              )
+            )?.[0]?.[0]?.id;
+
+            console.log(newId);
+
+            if (!newId) {
+              newId = (
+                await queryRunner.query(
+                  `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, false) returning id`,
+                  [item.id, size, material, price]
+                )
+              )?.[0]?.id;
+            }
+
+            idArray.push(newId);
+          }
+
+          for (let optionIndex in oa_parsed_backside) {
+            const { material, size, price } = oa_parsed_backside[optionIndex];
+
+            let newId = (
+              await queryRunner.query(
+                `update item_options set price=$4 
+              where size=$2 and material=$3 and is_backside = true and item_id = $1 returning id`,
+                [item.id, size, material, price]
+              )
+            )?.[0]?.[0]?.id;
+
+            if (!newId) {
+              newId = (
+                await queryRunner.query(
+                  `insert into item_options (item_id,size,material,price,is_backside) values ($1,$2,$3,$4, true) returning id`,
+                  [item.id, size, material, price]
+                )
+              )?.[0]?.id;
+            }
+
+            idArray.push(newId);
+          }
+
+          await queryRunner.query(
+            "delete from item_options where item_id = $1 and not (id = any($2))",
+            [item.id, idArray]
+          );
+        }
+
+        await queryRunner.commitTransaction();
+
+        console.log("выполнено");
+        res(1);
+      } catch (error) {
+        await queryRunner.rollbackTransaction();
+
+        console.log(error);
+        rej(new MySqlError(error));
+      } finally {
+        await queryRunner.release();
       }
-
-      await queryRunner.commitTransaction();
-
-      console.log("выполнено");
-    } catch (error) {
-      await queryRunner.rollbackTransaction();
-      console.log(error);
-    } finally {
-      await queryRunner.release();
-    }
+    });
   }
 
   editPost({
@@ -547,8 +548,9 @@ class UsersService {
             [id, idArray]
           );
 
+          console.log(editAll, !!editAll);
           if (editAll)
-            await this.editAllOptionsInCategory({
+            this.editAllOptionsInCategory({
               categoryName,
               oa_parsed,
               oa_parsed_backside,

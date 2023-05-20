@@ -541,12 +541,12 @@ class UsersService {
             [id, idArray]
           );
 
-          editAll &&
-            (await this.editAllOptionsInCategory({
+          if (editAll)
+            await this.editAllOptionsInCategory({
               categoryName,
               oa_parsed,
               oa_parsed_backside,
-            }));
+            });
 
           console.log(idArray);
         }

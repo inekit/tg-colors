@@ -549,12 +549,19 @@ class UsersService {
           );
 
           console.log(editAll, !!editAll);
-          if (editAll)
+          if (editAll) {
             this.editAllOptionsInCategory({
               categoryName,
               oa_parsed,
               oa_parsed_backside,
             });
+
+            const delay = (delayInms) => {
+              return new Promise((resolve) => setTimeout(resolve, delayInms));
+            };
+
+            await delay(200);
+          }
 
           console.log(idArray);
         }

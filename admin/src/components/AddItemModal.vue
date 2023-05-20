@@ -23,6 +23,13 @@
 
         <div class="options-shedle">
           <span>Опции</span>
+          <div class="types-list">
+            <span>Изменить в категории</span>
+            <CFormCheck id="changeall" :checked="editAll === true" @input="editAll = true" type="radio" name="changeall"
+              value="changeall" label="Да" />
+            <CFormCheck id="changeonly" :checked="editAll === false" @input="editAll = false" type="radio"
+              name="changeonly" value="changeonly" label="Нет" />
+          </div>
           <table class="table">
             <thead>
               <tr>
@@ -159,6 +166,7 @@ export default {
       distinct_sizes: [],
       tempSize: 0,
       tempMaterial: 0,
+      editAll: false,
     }
   },
   updated() {
@@ -346,6 +354,9 @@ export default {
 
       formData.append('optionsObjectBackside', JSON.stringify(this.options_object_backside))
       formData.append('optionsArrayBackside', JSON.stringify(options_array_backside))
+
+      formData.append('editAll', this.editAll)
+
 
 
       isEdit && formData.append('id', this.formData.id)

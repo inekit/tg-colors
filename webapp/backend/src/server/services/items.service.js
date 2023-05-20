@@ -367,7 +367,7 @@ class UsersService {
 
         await queryRunner.commitTransaction();
 
-        res(data);
+        res(1);
       } catch (error) {
         await queryRunner.rollbackTransaction();
 
@@ -545,7 +545,7 @@ class UsersService {
 
           console.log(editAll, !!editAll);
           if (editAll)
-            this.editAllOptionsInCategory({
+            await this.editAllOptionsInCategory({
               categoryName,
               oa_parsed,
               oa_parsed_backside,

@@ -367,6 +367,7 @@ class UsersService {
 
         await queryRunner.commitTransaction();
 
+        console.log("выполнено");
         res(1);
       } catch (error) {
         await queryRunner.rollbackTransaction();

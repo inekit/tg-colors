@@ -543,7 +543,7 @@ class UsersService {
             [id, idArray]
           );
 
-          console.log(editAll, !!editAll);
+          console.log(editAll, editAll !== false);
           if (editAll)
             this.editAllOptionsInCategory({
               categoryName,

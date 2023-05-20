@@ -317,11 +317,13 @@ export default {
 
       const options_array = [];
 
+      console.log(this.formData.options_array)
+
       for (let materialName in this.options_object) {
         for (let sizeName in this.options_object[materialName]) {
           options_array.push({
             material: materialName, size: sizeName, price: this.options_object[materialName][sizeName], id:
-              this.formData.options_array.find(el => el.material === materialName && el.size === sizeName)
+              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)
           })
         }
       }

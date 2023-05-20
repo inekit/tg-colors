@@ -319,10 +319,12 @@ export default {
 
       for (let materialName in this.options_object) {
         for (let sizeName in this.options_object[materialName]) {
-          options_array.push({
-            material: materialName, size: sizeName, price: this.options_object[materialName][sizeName], id:
-              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)?.id
-          })
+          const price = this.options_object[materialName][sizeName];
+          if (price)
+            options_array.push({
+              material: materialName, size: sizeName, price: price, id:
+                this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName && !el.is_backside)?.id
+            })
         }
       }
 
@@ -333,10 +335,12 @@ export default {
 
       for (let materialName in this.options_object_backside) {
         for (let sizeName in this.options_object_backside[materialName]) {
-          options_array_backside.push({
-            material: materialName, size: sizeName, price: this.options_object_backside[materialName][sizeName], id:
-              this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName)?.id
-          })
+          const price = this.options_object_backside[materialName][sizeName];
+          if (price)
+            options_array_backside.push({
+              material: materialName, size: sizeName, price: price, id:
+                this.formData.options_array?.find(el => el.material === materialName && el.size === sizeName && el.is_backside)?.id
+            })
         }
       }
 

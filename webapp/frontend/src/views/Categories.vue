@@ -6,7 +6,7 @@
     </InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
     <div class="categories-block">
-        <div class="result-item" v-for="item, index in $store.state.categories ?? []">
+        <div class="result-item" v-for="item, index in ($store.state.categories ?? [])">
             <router-link :to="`/results/${$store.state.userId}?category=${item.name}`">
                 <div class="img-container">
                     <img :src="`/pics/${getPreviewLink(item.preview)}`"
@@ -126,7 +126,7 @@ export default {
 
         },
         getPreviewLink(link) {
-            const parts = link.match(/\.([^.]+)$|$/)
+            const parts = link?.match(/\.([^.]+)$|$/)
             if (!parts?.[1]) return;
             return link?.split('.').slice(0, -1).join('.') + '_preview.' + parts[1]
 

@@ -31,7 +31,7 @@ class Robokassa {
           },
         })
         .then((response) => {
-          console.log(response.data);
+          console.log(response);
           resolve(
             `https://auth.robokassa.ru/Merchant/Index/${response.data?.invoiceID}`
           );

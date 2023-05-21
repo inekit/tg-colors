@@ -32,12 +32,10 @@ class Robokassa {
           },
           {
             headers: { "Content-Type": "multipart/form-data" },
-
-            //body:
           }
         )
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           resolve(
             `https://auth.robokassa.ru/Merchant/Index/${response.data?.invoiceID}`
           );

@@ -5,22 +5,19 @@
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200">
     </InstagramLoader>
     <InstagramLoader class="preloader" ref="preloader" viewBox="0 0 300 200"></InstagramLoader>
-    <MasonryWall class="categories-block" :items="$store.state.categories ?? []" :ssr-columns="2"
-        :column-width="bodyWidth / 3" :gap="12">
-        <template #default="{ item, index }">
-            <div class="result-item">
-                <router-link :to="`/results/${$store.state.userId}?category=${item.name}`">
-                    <div class="img-container">
-                        <img :src="`/pics/${getPreviewLink(item.preview)}`"
-                            :onerror="`javascript:this.onerror=null;this.src='/pics/${item.preview}';`" />
-                    </div>
-                    <div class="text-container">
-                        <h2>{{ item.name }}</h2>
-                    </div>
-                </router-link>
-            </div>
-        </template>
-    </MasonryWall>
+    <div class="categories-block">
+        <div class="result-item" v-for="item, index in $store.state.categories ?? []">
+            <router-link :to="`/results/${$store.state.userId}?category=${item.name}`">
+                <div class="img-container">
+                    <img :src="`/pics/${getPreviewLink(item.preview)}`"
+                        :onerror="`javascript:this.onerror=null;this.src='/pics/${item.preview}';`" />
+                </div>
+                <div class="text-container">
+                    <h2>{{ item.name }}</h2>
+                </div>
+            </router-link>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -141,6 +138,8 @@ export default {
 
 <style lang="scss">
 .categories-block {
+    display: flex;
+    gap: 12px;
     width: calc(100% - 2rem);
     margin: 1rem;
     padding: 0;
@@ -156,6 +155,8 @@ export default {
         width: 100%;
         height: fit-content;
         margin: 0;
+        flex: 0 0 calc(33% - 7.2px) !important;
+
 
         border-radius: 1rem;
         display: block;
@@ -169,22 +170,12 @@ export default {
         overflow: hidden;
         position: relative;
 
-        &:nth-child(4n) {
-            margin-top: -6vw
-        }
-
-        &:nth-child(4n+1),
-        &:nth-child(4n) {
-            .img-container {
-                height: 40vw;
-            }
-        }
 
         .img-container {
             background-color: #414141;
             background-color: var(--tg-theme-text-color);
             width: 100%;
-            height: 30vw;
+            height: 40vw;
             position: relative;
             overflow: hidden;
         }
@@ -217,14 +208,6 @@ export default {
                 width: 100%;
                 height: 100%;
             }
-        }
-
-        &:nth-child(2n-1) {
-            margin-right: 0.5rem;
-        }
-
-        &:nth-child(2n) {
-            margin-left: 0.5rem;
         }
 
     }

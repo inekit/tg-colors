@@ -139,7 +139,7 @@ export default {
 <style lang="scss">
 .categories-block {
     display: flex;
-    gap: 12px;
+    gap: 16px;
     width: calc(100% - 2rem);
     margin: 1rem;
     padding: 0;
@@ -155,7 +155,7 @@ export default {
         width: 100%;
         height: fit-content;
         margin: 0;
-        flex: 0 0 calc(50% - 6px) !important;
+        flex: 0 0 calc(50% - 8px) !important;
 
 
         border-radius: 1rem;

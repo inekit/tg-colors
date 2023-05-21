@@ -155,7 +155,7 @@ export default {
         width: 100%;
         height: fit-content;
         margin: 0;
-        flex: 0 0 calc(33% - 7.2px) !important;
+        flex: 0 0 calc(50% - 6px) !important;
 
 
         border-radius: 1rem;

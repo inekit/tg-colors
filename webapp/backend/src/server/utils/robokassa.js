@@ -20,16 +20,18 @@ class Robokassa {
 
     return new Promise((resolve, reject) => {
       axios
-        .post(`https://auth.robokassa.ru/Merchant/Indexjson.aspx`, {
-          MerchantLogin: this.MerchantLogin,
-          //OutSum: OutSum,
-          //invoiceID: InvId,
-          //Receipt: Receipt,
-          //SignatureValue: signature,
-          //Culture: "ru",
+        .post(`https://auth.robokassa.ru/Merchant/Indexjson.aspx`, null, {
+          body: {
+            MerchantLogin: this.MerchantLogin,
+            OutSum: OutSum,
+            invoiceID: InvId,
+            Receipt: encodeURI(JSON.stringify(Receipt)),
+            SignatureValue: signature,
+            Culture: "ru",
+          },
         })
         .then((response) => {
-          console.log(response);
+          console.log(response.data);
           resolve(
             `https://auth.robokassa.ru/Merchant/Index/${response.data?.invoiceID}`
           );

@@ -20,8 +20,9 @@ class Robokassa {
 
     return new Promise((resolve, reject) => {
       axios
-        .post(`https://auth.robokassa.ru/Merchant/Indexjson.aspx`, null, {
-          body: {
+        .post(
+          `https://auth.robokassa.ru/Merchant/Indexjson.aspx`,
+          {
             MerchantLogin: this.MerchantLogin,
             OutSum: OutSum,
             invoiceID: InvId,
@@ -29,7 +30,12 @@ class Robokassa {
             SignatureValue: signature,
             Culture: "ru",
           },
-        })
+          {
+            headers: { "Content-Type": "multipart/form-data" },
+
+            //body:
+          }
+        )
         .then((response) => {
           console.log(response);
           resolve(

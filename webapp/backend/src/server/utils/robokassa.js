@@ -22,11 +22,11 @@ class Robokassa {
       axios
         .post(`https://auth.robokassa.ru/Merchant/Indexjson.aspx`, {
           MerchantLogin: this.MerchantLogin,
-          OutSum: OutSum,
-          invoiceID: InvId,
-          Receipt: Receipt,
-          SignatureValue: signature,
-          Culture: "ru",
+          //OutSum: OutSum,
+          //invoiceID: InvId,
+          //Receipt: Receipt,
+          //SignatureValue: signature,
+          //Culture: "ru",
         })
         .then((response) => {
           console.log(response);
